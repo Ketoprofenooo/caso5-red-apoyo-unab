@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Derivacion Docente Responsable</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="marca">
+    <div class="marca-icono">RA</div>
+    <div class="marca-texto">
+      <div class="marca-titulo">Red de Apoyo</div>
+      <div class="marca-subtitulo">Salud Mental Universitaria</div>
+    </div>
+  </div>
+  <nav class="navegacion">
+    <a href="#">Inicio</a>
+    <a href="solicitud_estudiante.html">Estudiantes</a>
+    <a href="derivacion_docente.html" class="activo">Profesores</a>
+    <a href="#">Consejeros</a>
+  </nav>
+  <div class="acciones-encabezado">
+    <a href="#" class="boton-emergencia">Ayuda Inmediata / Linea de Crisis</a>
+    <div class="avatar"></div>
+  </div>
+</header>
+
+<div class="banner-alerta">
+  <div class="banner-alerta-texto">
+    <span><strong>¿Riesgo o crisis en desarrollo?</strong> Si el estudiante se encuentra en peligro inminente, contactar de inmediato a la Linea de Emergencia.</span>
+  </div>
+  <button type="button" class="boton-llamar">600 220 3333</button>
+</div>
+
+<main class="contenido ancho">
+  <div class="encabezado-pagina">
+    <div class="insignia">Red Docente de Cuidado Academico · RF2 / CU2</div>
+    <h1 class="titulo-pagina">Derivacion Docente Responsable</h1>
+    <p class="subtitulo-pagina">Canal institucional confidencial para derivar estudiantes que requieran apoyo emocional o academico oportuno.</p>
+  </div>
+
+  <div class="tarjeta">
+    <form id="formDocente">
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">1</span>
+            <span class="titulo-seccion">Datos del Estudiante</span>
+          </div>
+        </div>
+
+        <div class="fila-campos">
+          <div class="grupo-campo">
+            <label for="nombreEstudianteDerivado">Nombre Completo <span class="obligatorio">*</span></label>
+            <input type="text" id="nombreEstudianteDerivado" name="nombreEstudianteDerivado" placeholder="Ej. Sofia Valenzuela Ruiz" required>
+          </div>
+          <div class="grupo-campo">
+            <label for="rutEstudiante">Rol / Matricula o Correo Institucional <span class="obligatorio">*</span></label>
+            <input type="text" id="rutEstudiante" name="rutEstudiante" placeholder="sofia.valenzuela@alumnos.edu" required>
+          </div>
+        </div>
+
+        <div class="grupo-campo">
+          <label for="cursoEstudiante">Carrera / Asignatura del Caso <span class="obligatorio">*</span></label>
+          <input type="text" id="cursoEstudiante" name="cursoEstudiante" placeholder="Ej. Ing. Civil - Calculo Multivariable (Secc. 3)" required>
+        </div>
+      </div>
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">2</span>
+            <span class="titulo-seccion">Señales de Alerta Observadas</span>
+          </div>
+        </div>
+
+        <div class="lista-casillas">
+          <label class="opcion-casilla">
+            <input type="checkbox" name="alertas" value="asistencia">
+            <div>
+              <div class="casilla-titulo">Disminucion abrupta en asistencia / inasistencias reiteradas</div>
+              <div class="casilla-descripcion">Ausencias notorias, reprobacion repetida o multiples ausencias sin aviso.</div>
+            </div>
+          </label>
+          <label class="opcion-casilla">
+            <input type="checkbox" name="alertas" value="animo">
+            <div>
+              <div class="casilla-titulo">Cambios animicos o conductuales notables</div>
+              <div class="casilla-descripcion">Aislamiento social, desanimo prolongado, irritabilidad o llanto seguido.</div>
+            </div>
+          </label>
+          <label class="opcion-casilla">
+            <input type="checkbox" name="alertas" value="desanimo">
+            <div>
+              <div class="casilla-titulo">Expresion explicita de angustia o desanimo</div>
+              <div class="casilla-descripcion">Comentarios de desesperanza, agobio extremo o cansancio inusual.</div>
+            </div>
+          </label>
+          <label class="opcion-casilla">
+            <input type="checkbox" name="alertas" value="orientacion">
+            <div>
+              <div class="casilla-titulo">Solicitud directa de orientacion o apoyo</div>
+              <div class="casilla-descripcion">El estudiante pidio ayuda o fue el ultimo caso que se comento en contexto.</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">3</span>
+            <span class="titulo-seccion">Descripcion Objetiva de lo Observado</span>
+          </div>
+        </div>
+        <div class="grupo-campo">
+          <textarea id="motivoDerivacion" name="motivoDerivacion" maxlength="800" placeholder="Describe conductas y hechos puntuales observables de manera concisa y respetuosa." required></textarea>
+          <div class="contador-caracteres"><span id="contadorMotivo">0</span> / 800</div>
+        </div>
+        <p class="texto-ayuda">Informacion protegida bajo confidencialidad y secreto profesional.</p>
+      </div>
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">4</span>
+            <span class="titulo-seccion">Nivel de Urgencia y Dialogo Previo</span>
+          </div>
+        </div>
+
+        <div class="grupo-campo">
+          <label>Prioridad estimada segun criterio docente</label>
+          <div class="opciones-urgencia">
+            <label class="opcion-urgencia baja">
+              <input type="radio" name="urgenciaDocente" value="preventivo" required>
+              <div class="urgencia-titulo">Preventivo</div>
+              <div class="urgencia-descripcion">Orientacion regular</div>
+            </label>
+            <label class="opcion-urgencia media">
+              <input type="radio" name="urgenciaDocente" value="seguimiento">
+              <div class="urgencia-titulo">Seguimiento Habitual</div>
+              <div class="urgencia-descripcion">Contacto reciente</div>
+            </label>
+            <label class="opcion-urgencia alta">
+              <input type="radio" name="urgenciaDocente" value="prioritario">
+              <div class="urgencia-titulo">Prioritario / Riesgo</div>
+              <div class="urgencia-descripcion">Atencion preferente</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="grupo-campo">
+          <label>¿Ya conversaste previamente con el estudiante?</label>
+          <div class="opciones-tarjeta">
+            <label class="opcion-tarjeta">
+              <input type="radio" name="dialogoPrevio" value="si" required>
+              <div class="opcion-titulo">Si, de acuerdo</div>
+            </label>
+            <label class="opcion-tarjeta">
+              <input type="radio" name="dialogoPrevio" value="no">
+              <div class="opcion-titulo">No</div>
+            </label>
+            <label class="opcion-tarjeta">
+              <input type="radio" name="dialogoPrevio" value="no_pude">
+              <div class="opcion-titulo">No fue posible contactarlo</div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">5</span>
+            <span class="titulo-seccion">Datos del Docente Derivador</span>
+          </div>
+        </div>
+
+        <div class="fila-campos">
+          <div class="grupo-campo">
+            <label for="nombreDocente">Nombre del Docente <span class="obligatorio">*</span></label>
+            <input type="text" id="nombreDocente" name="nombreDocente" placeholder="Dr. Carlos Mendoza Antiga" required>
+          </div>
+          <div class="grupo-campo">
+            <label for="departamentoDocente">Departamento <span class="obligatorio">*</span></label>
+            <input type="text" id="departamentoDocente" name="departamentoDocente" placeholder="Facultad de Ingenieria y Cs." required>
+          </div>
+        </div>
+
+        <div class="grupo-campo">
+          <label for="contactoDocente">Telefono / Anexo <span class="obligatorio">*</span></label>
+          <input type="tel" id="contactoDocente" name="contactoDocente" placeholder="+56 9 8452 1102" required>
+        </div>
+      </div>
+
+      <div class="acciones-formulario">
+        <button type="button" class="boton boton-secundario">Cancelar</button>
+        <button type="button" class="boton boton-texto">Guardar Borrador</button>
+        <button type="submit" class="boton boton-primario">Ingresar Derivacion</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<div class="pie-emergencia">
+  <div class="pie-emergencia-texto">
+    <div>
+      <strong>Linea Universitaria de Emergencia 24/7</strong>
+      <span>Atencion inmediata, confidencial y sin costo para toda la comunidad academica.</span>
+    </div>
+  </div>
+  <button type="button" class="boton boton-primario">600 220 3333</button>
+</div>
+
+<div class="pie-pagina">
+  <div>
+    <h4>Red de Apoyo</h4>
+    <p>Direccion de Bienestar y Salud Mental Institucional. Acompañamiento profesional en el entorno seguro y de confianza.</p>
+  </div>
+  <div>
+    <h4>Compromiso Etico y Confidencialidad</h4>
+    <p>Toda consulta y registro clinico esta protegido por el estricto secreto profesional y las normas institucionales de proteccion de datos sensibles.</p>
+  </div>
+  <div>
+    <h4>Ubicacion y Canales</h4>
+    <p>Edificio de Bienestar Estudiantil, Piso 2. bienestar.central@universidad.edu</p>
+  </div>
+</div>
+
+<div class="pie-pagina-inferior">
+  <span>© 2026 Red de Apoyo · Universidad. Todos los derechos reservados.</span>
+  <span>Privacidad · Terminos · Protocolos de Emergencia</span>
+</div>
+
+<script src="script_docente.js"></script>
+
+</body>
+</html>

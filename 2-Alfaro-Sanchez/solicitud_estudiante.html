@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Solicitud de Apoyo Estudiantil</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="marca">
+    <div class="marca-icono">RA</div>
+    <div class="marca-texto">
+      <div class="marca-titulo">Red de Apoyo</div>
+      <div class="marca-subtitulo">Salud Mental Universitaria</div>
+    </div>
+  </div>
+  <nav class="navegacion">
+    <a href="#">Inicio</a>
+    <a href="solicitud_estudiante.html" class="activo">Estudiantes</a>
+    <a href="derivacion_docente.html">Profesores</a>
+    <a href="#">Consejeros</a>
+  </nav>
+  <div class="acciones-encabezado">
+    <a href="#" class="boton-emergencia">Ayuda Inmediata / Linea de Crisis</a>
+    <div class="avatar"></div>
+  </div>
+</header>
+
+<div class="banner-alerta">
+  <div class="banner-alerta-texto">
+    <span><strong>¿Crisis inmediata?</strong> No debes esperar a la proxima cita, ve directo a Linea de Emergencia</span>
+  </div>
+  <button type="button" class="boton-llamar">Llamar 600 220 3333</button>
+</div>
+
+<main class="contenido">
+  <div class="encabezado-pagina">
+    <div class="insignia">100% Confidencial · Red de Bienestar</div>
+    <h1 class="titulo-pagina">Solicitud de Apoyo Estudiantil</h1>
+    <p class="subtitulo-pagina">Cuentanos brevemente como podemos acompañarte. La informacion es gestionada unicamente por el equipo de psicologos y consejeros asociados.</p>
+  </div>
+
+  <div class="tarjeta">
+    <form id="formEstudiante">
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">1</span>
+            <span class="titulo-seccion">Motivo de consulta</span>
+          </div>
+          <span class="etiqueta-requerido">Requerido</span>
+        </div>
+        <p class="texto-ayuda">Selecciona el area que mejor se ajusta a tu situacion.</p>
+
+        <div class="opciones-tarjeta">
+          <label class="opcion-tarjeta">
+            <input type="radio" name="motivo" value="emocional" required>
+            <div class="opcion-titulo">Emocional Sobre</div>
+            <div class="opcion-descripcion">Ansiedad, estado de animo o crisis emocional</div>
+          </label>
+          <label class="opcion-tarjeta">
+            <input type="radio" name="motivo" value="academico">
+            <div class="opcion-titulo">Academico y Habitos</div>
+            <div class="opcion-descripcion">Rendimiento o bloqueo</div>
+          </label>
+          <label class="opcion-tarjeta">
+            <input type="radio" name="motivo" value="personal">
+            <div class="opcion-titulo">Personal o Duelo</div>
+            <div class="opcion-descripcion">Perdidas o situaciones dificiles</div>
+          </label>
+          <label class="opcion-tarjeta">
+            <input type="radio" name="motivo" value="otro">
+            <div class="opcion-titulo">Otro Motivo</div>
+            <div class="opcion-descripcion">Podras detallarlo abajo</div>
+          </label>
+        </div>
+      </div>
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">2</span>
+            <span class="titulo-seccion">Descripcion breve</span>
+          </div>
+        </div>
+        <p class="texto-ayuda">Explica en tus palabras que esta pasando o en que quisieras apoyo.</p>
+        <div class="grupo-campo">
+          <textarea id="descripcion" name="descripcion" maxlength="500" placeholder="Ejemplo: Siento dificultad para concentrarme, problemas para dormir y ansiedad constante de cara a las evaluaciones." required></textarea>
+          <div class="contador-caracteres"><span id="contadorDescripcion">0</span> / 500</div>
+        </div>
+      </div>
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">3</span>
+            <span class="titulo-seccion">Nivel de urgencia percibida</span>
+          </div>
+        </div>
+        <p class="texto-ayuda">Ayudanos a coordinar y agendar con la prioridad adecuada.</p>
+
+        <div class="opciones-urgencia">
+          <label class="opcion-urgencia baja">
+            <input type="radio" name="urgencia" value="baja" required>
+            <div class="urgencia-titulo">Baja</div>
+            <div class="urgencia-descripcion">Orientacion preventiva. Puedo esperar unos dias.</div>
+          </label>
+          <label class="opcion-urgencia media">
+            <input type="radio" name="urgencia" value="media">
+            <div class="urgencia-titulo">Moderada</div>
+            <div class="urgencia-descripcion">Afecta rendimiento diario o bienestar general.</div>
+          </label>
+          <label class="opcion-urgencia alta">
+            <input type="radio" name="urgencia" value="alta">
+            <div class="urgencia-titulo">Alta</div>
+            <div class="urgencia-descripcion">Siento sobrecarga clara y requiero cita pronto.</div>
+          </label>
+        </div>
+      </div>
+
+      <div class="seccion-formulario">
+        <div class="encabezado-seccion">
+          <div class="encabezado-seccion-izq">
+            <span class="numero-seccion">4</span>
+            <span class="titulo-seccion">Modalidad y Contacto</span>
+          </div>
+        </div>
+
+        <div class="grupo-campo">
+          <label>Modalidad preferida</label>
+          <div class="opciones-tarjeta">
+            <label class="opcion-tarjeta">
+              <input type="radio" name="modalidad" value="presencial" required>
+              <div class="opcion-titulo">Presencial</div>
+            </label>
+            <label class="opcion-tarjeta">
+              <input type="radio" name="modalidad" value="online">
+              <div class="opcion-titulo">Online</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="grupo-campo">
+          <label for="contactoEstudiante">Telefono de contacto directo</label>
+          <input type="tel" id="contactoEstudiante" name="contactoEstudiante" placeholder="+56 9 1234 5678" required>
+        </div>
+      </div>
+
+      <div class="fila-consentimiento">
+        <input type="checkbox" id="consentimiento" name="consentimiento" required>
+        <label for="consentimiento">Acepto el consentimiento informado y el procesamiento confidencial de mis datos de bienestar estudiantil.</label>
+      </div>
+
+      <div class="acciones-formulario">
+        <button type="button" class="boton boton-texto">Guardar borrador para despues</button>
+        <button type="submit" class="boton boton-primario">Enviar Solicitud</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<div class="pie-emergencia">
+  <div class="pie-emergencia-texto">
+    <div>
+      <strong>Linea Universitaria de Emergencia 24/7</strong>
+      <span>Atencion inmediata, confidencial y sin costo para toda la comunidad academica.</span>
+    </div>
+  </div>
+  <button type="button" class="boton boton-primario">600 220 3333</button>
+</div>
+
+<div class="pie-pagina">
+  <div>
+    <h4>Red de Apoyo</h4>
+    <p>Direccion de Bienestar y Salud Mental Institucional. Acompañamiento profesional en el entorno seguro y de confianza.</p>
+  </div>
+  <div>
+    <h4>Compromiso Etico y Confidencialidad</h4>
+    <p>Toda consulta y registro clinico esta protegido por el estricto secreto profesional y las normas institucionales de proteccion de datos sensibles.</p>
+  </div>
+  <div>
+    <h4>Ubicacion y Canales</h4>
+    <p>Edificio de Bienestar Estudiantil, Piso 2. bienestar.central@universidad.edu</p>
+  </div>
+</div>
+
+<div class="pie-pagina-inferior">
+  <span>© 2026 Red de Apoyo · Universidad. Todos los derechos reservados.</span>
+  <span>Privacidad · Terminos · Protocolos de Emergencia</span>
+</div>
+
+<script src="script_estudiante.js"></script>
+
+</body>
+</html>

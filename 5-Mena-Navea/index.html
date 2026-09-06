@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión y Prevención - Red de Apoyo Universitaria</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="admin-header">
+        <h1>Área de Prevención y Administración</h1>
+        <nav class="admin-nav">
+            <button class="tab-btn active" data-target="talleres">Talleres Preventivos</button>
+            <button class="tab-btn" data-target="administracion">Mantenedores</button>
+            <button class="tab-btn" data-target="reportes">Reportes Agregados</button>
+            <button class="tab-btn" data-target="bitacora">Bitácora de Accesos</button>
+        </nav>
+    </header>
+
+    <main class="admin-content">
+        <section id="talleres" class="tab-content active">
+            <h2>Talleres y Actividades</h2>
+            <div class="cards-container">
+                <article class="taller-card">
+                    <h3>Manejo del Estrés Académico</h3>
+                    <p>Sesión grupal para desarrollar herramientas de afrontamiento ante evaluaciones.</p>
+                    <span class="badge">Cupos disponibles: 12</span>
+                    <button class="btn-primary">Inscribirse</button>
+                </article>
+                <article class="taller-card">
+                    <h3>Gestión del Tiempo</h3>
+                    <p>Estrategias prácticas para equilibrar la carga de estudio y la vida personal.</p>
+                    <span class="badge">Cupos disponibles: 5</span>
+                    <button class="btn-primary">Inscribirse</button>
+                </article>
+            </div>
+        </section>
+
+        <section id="administracion" class="tab-content hidden">
+            <h2>Administración del Sistema</h2>
+            <div class="mantenedor-grid">
+                <div class="mantenedor-panel">
+                    <h3>Gestión de Usuarios</h3>
+                    <button class="btn-secondary">Administrar Perfiles</button>
+                </div>
+                <div class="mantenedor-panel">
+                    <h3>Unidades de Apoyo</h3>
+                    <button class="btn-secondary">Administrar Sedes</button>
+                </div>
+                <div class="mantenedor-panel">
+                    <h3>Tipos de Solicitud</h3>
+                    <button class="btn-secondary">Configurar Categorías</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="reportes" class="tab-content hidden">
+            <h2>Tablero de Reportes</h2>
+            <p class="aviso-privacidad">Aviso: Los datos presentados son agregados. No se expone información nominal (RNF6).</p>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Motivo de Consulta</th>
+                        <th>Total Solicitudes (Mes)</th>
+                        <th>Tiempo Promedio Asignación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Orientación Académica</td>
+                        <td>45</td>
+                        <td>24 horas</td>
+                    </tr>
+                    <tr>
+                        <td>Acompañamiento Emocional</td>
+                        <td>32</td>
+                        <td>12 horas</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="bitacora" class="tab-content hidden">
+            <h2>Bitácora de Accesos</h2>
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Fecha y Hora</th>
+                        <th>Usuario (Rol)</th>
+                        <th>Acción Realizada</th>
+                        <th>Módulo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2026-08-28 09:15</td>
+                        <td>admin_bienestar</td>
+                        <td>Creación de Taller</td>
+                        <td>Talleres</td>
+                    </tr>
+                    <tr>
+                        <td>2026-08-28 10:05</td>
+                        <td>orientador_sede1</td>
+                        <td>Lectura de caso #1042</td>
+                        <td>Solicitudes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

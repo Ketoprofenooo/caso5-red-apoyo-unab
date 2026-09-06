@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Bandeja del Orientador</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <!-- ========================================
+             SIDEBAR
+        ========================================= -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-top">
+
+                <div class="logo">
+
+                    <div class="logo-icon">
+                        🩺
+                    </div>
+
+                    <div class="logo-info">
+
+                        <h2>Orientación</h2>
+
+                        <p>Bienestar Estudiantil</p>
+
+                    </div>
+
+                </div>
+
+                <nav class="sidebar-menu">
+
+                    <ul>
+
+                        <li class="active">
+
+                            #
+
+                                <span>📋</span>
+
+                                <span>Bandeja</span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            #
+
+                                <span>👤</span>
+
+                                <span>Mis Casos</span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            #
+
+                                <span>📊</span>
+
+                                <span>Estadísticas</span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            #
+
+                                <span>👨‍⚕️</span>
+
+                                <span>Profesionales</span>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            #
+
+                                <span>🎓</span>
+
+                                <span>Estudiantes</span>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+
+            </div>
+
+        </aside>
+
+        <!-- ========================================
+             CONTENIDO
+        ========================================= -->
+
+        <main class="content">
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="header-left">
+
+                    <div class="header-title">
+
+                        <div class="header-icon">
+                            🩺
+                        </div>
+
+                        <div>
+
+                            <h1>
+                                Bandeja de Orientación
+                            </h1>
+
+                            <p>
+                                Gestión de solicitudes estudiantiles
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="header-right">
+
+                    <div class="notification-btn">
+
+                        🔔
+
+                        <span
+                            class="notification-badge">
+                        </span>
+
+                    </div>
+
+                    <div class="profile-card">
+
+                        <div class="profile-avatar">
+                            AO
+                        </div>
+
+                        <div class="profile-info">
+
+                            <h4>
+                                Orientador
+                            </h4>
+
+                            <span>
+                                En línea
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- ========================================
+                 KPI
+            ========================================= -->
+
+            <section class="cards">
+
+                <div class="card kpi-total">
+
+                    <div class="card-icon">
+                        📋
+                    </div>
+
+                    <div class="card-content">
+
+                        <div
+                            id="kpiTotal"
+                            class="card-number">
+
+                            0
+
+                        </div>
+
+                        <div class="card-title">
+                            Solicitudes
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card kpi-urgent">
+
+                    <div class="card-icon">
+                        ⚠️
+                    </div>
+
+                    <div class="card-content">
+
+                        <div
+                            id="kpiUrgentes"
+                            class="card-number">
+
+                            0
+
+                        </div>
+
+                        <div class="card-title">
+                            Urgentes
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card kpi-asignadas">
+
+                    <div class="card-icon">
+                        👨‍⚕️
+                    </div>
+
+                    <div class="card-content">
+
+                        <div
+                            id="kpiAsignadas"
+                            class="card-number">
+
+                            0
+
+                        </div>
+
+                        <div class="card-title">
+                            Asignadas
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card kpi-pendientes">
+
+                    <div class="card-icon">
+                        ⏳
+                    </div>
+
+                    <div class="card-content">
+
+                        <div
+                            id="kpiPendientes"
+                            class="card-number">
+
+                            0
+
+                        </div>
+
+                        <div class="card-title">
+                            Pendientes
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ========================================
+                 FILTROS
+            ========================================= -->
+
+            <section class="filters">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Buscar estudiante...">
+
+                <select id="filterType">
+
+                    <option value="">
+                        Todos los tipos
+                    </option>
+
+                    <option value="emocional">
+                        Emocional
+                    </option>
+
+                    <option value="academico">
+                        Académico
+                    </option>
+
+                    <option value="social">
+                        Social
+                    </option>
+
+                    <option value="economico">
+                        Económico
+                    </option>
+
+                </select>
+
+                <select id="filterEstado">
+
+                    <option value="">
+                        Todos los estados
+                    </option>
+
+                    <option value="pendiente">
+                        Pendiente
+                    </option>
+
+                    <option value="asignada">
+                        Asignada
+                    </option>
+
+                    <option value="resuelta">
+                        Resuelta
+                    </option>
+
+                </select>
+
+                <select id="sortUrgencia">
+
+                    <option value="">
+                        Urgencia
+                    </option>
+
+                    <option value="desc">
+                        Alta → Baja
+                    </option>
+
+                    <option value="asc">
+                        Baja → Alta
+                    </option>
+
+                </select>
+
+                <button
+                    id="btnLimpiar"
+                    class="btn-action">
+
+                    Limpiar
+
+                </button>
+
+            </section>
+
+            <!-- ========================================
+                 TABLA
+            ========================================= -->
+
+            <div class="table-container">
+
+                <table id="solicitudesTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Estudiante</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Urgencia</th>
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- ========================================
+                 PAGINACION
+            ========================================= -->
+
+            <div class="pagination-container">
+
+                <div class="pagination-left">
+
+                    <div class="records-selector">
+
+                        <label for="recordsPerPage">
+                            Mostrar
+                        </label>
+
+                        <select id="recordsPerPage">
+
+                            <option value="5">5</option>
+
+                            <option value="10" selected>
+                                10
+                            </option>
+
+                            <option value="20">
+                                20
+                            </option>
+
+                            <option value="50">
+                                50
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div
+                        id="recordsInfo"
+                        class="records-info">
+
+                        Mostrando 0 - 0 de 0 registros
+
+                    </div>
+
+                </div>
+
+                <div class="pagination-right">
+
+                    <button
+                        id="firstPage"
+                        class="pagination-nav">
+
+                        ⏮
+
+                    </button>
+
+                    <button
+                        id="prevPage"
+                        class="pagination-nav">
+
+                        ◀
+
+                    </button>
+
+                    <div
+                        id="paginationPages"
+                        class="pagination-pages">
+
+                    </div>
+
+                    <span
+                        id="pageInfo"
+                        class="page-info">
+
+                        Página 1 de 1
+
+                    </span>
+
+                    <button
+                        id="nextPage"
+                        class="pagination-nav">
+
+                        ▶
+
+                    </button>
+
+                    <button
+                        id="lastPage"
+                        class="pagination-nav">
+
+                        ⏭
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- ========================================
+         MODAL ASIGNACIÓN
+    ========================================= -->
+
+    <div
+        class="modal"
+        id="modalAsignacion">
+
+        <div class="modal-content">
+
+            <h2>
+                Asignar Profesional
+            </h2>
+
+            <select id="profesional">
+
+                <option value="">
+                    Seleccione profesional
+                </option>
+
+                <option>
+                    Ana Martínez
+                </option>
+
+                <option>
+                    Pedro Ruiz
+                </option>
+
+                <option>
+                    José Díaz
+                </option>
+
+            </select>
+
+            <button
+                class="btn-action btn-asignar"
+                onclick="asignarProfesional()">
+
+                Guardar Asignación
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+
+</body>
+
+</html>

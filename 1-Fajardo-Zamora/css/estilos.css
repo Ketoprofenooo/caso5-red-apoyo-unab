@@ -1,0 +1,429 @@
+/* ============================================================
+   Red de Apoyo y Salud Mental Universitaria
+   Home institucional (RF1 - CU1)
+   José Fajardo Zamora
+   ============================================================ */
+
+/* ---------- 1. Variables de color ---------- */
+:root {
+  --verde: #14403C;
+  --verde-claro: #4F7C6E;
+  --fondo: #FFFFFF;
+  --fondo-gris: #F4F5F2;
+  --texto: #1E2A28;
+  --texto-suave: #55635F;
+  --borde: #D9DED9;
+  --rojo: #9B3B2E;
+}
+
+/* ---------- 2. Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  color: var(--verde);
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.05rem; }
+
+p {
+  margin: 0 0 12px;
+}
+
+a {
+  color: var(--verde);
+}
+
+/* El contenedor centra todo y le pone un ancho máximo */
+.contenedor {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.oculto {
+  display: none;
+}
+
+/* ---------- 3. Encabezado y menú ---------- */
+.cabecera {
+  background-color: var(--verde);
+  padding: 14px 0;
+}
+
+.cabecera__fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.marca {
+  margin: 0;
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: .92rem;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 4. Portada ---------- */
+.portada {
+  background-color: var(--fondo-gris);
+  padding: 48px 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.portada__texto {
+  max-width: 62ch;
+  color: var(--texto-suave);
+}
+
+.portada__botones {
+  margin: 20px 0 12px;
+}
+
+.portada__nota {
+  margin: 0;
+  font-size: .88rem;
+  color: var(--texto-suave);
+}
+
+/* ---------- 5. Botones ---------- */
+.boton {
+  display: inline-block;
+  background-color: var(--verde);
+  color: #FFFFFF;
+  border: 1px solid var(--verde);
+  border-radius: 6px;
+  padding: 11px 20px;
+  margin-right: 8px;
+  font-size: .95rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: var(--verde-claro);
+  border-color: var(--verde-claro);
+}
+
+.boton--claro {
+  background-color: transparent;
+  color: var(--verde);
+}
+
+.boton--claro:hover {
+  background-color: var(--fondo-gris);
+  color: var(--verde);
+  border-color: var(--verde);
+}
+
+.boton--ancho {
+  display: block;
+  width: 100%;
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+/* ---------- 6. Aviso importante ---------- */
+.aviso {
+  border: 1px solid var(--rojo);
+  border-left: 5px solid var(--rojo);
+  border-radius: 6px;
+  background-color: #FBF3F1;
+  padding: 14px 16px;
+  margin: 24px 0 0;
+  font-size: .93rem;
+}
+
+/* ---------- 7. Secciones y tarjetas ---------- */
+.seccion {
+  padding: 44px 0;
+}
+
+.seccion--gris {
+  background-color: var(--fondo-gris);
+  border-top: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+}
+
+.seccion__bajada {
+  max-width: 62ch;
+  color: var(--texto-suave);
+  margin-bottom: 24px;
+}
+
+/* Grilla pareja: todas las tarjetas del mismo porte */
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tarjeta {
+  background-color: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.tarjeta p {
+  font-size: .92rem;
+  color: var(--texto-suave);
+}
+
+.tarjeta__pie {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--borde);
+  font-size: .82rem;
+  color: var(--verde-claro);
+}
+
+.tarjeta--urgente {
+  border-color: var(--rojo);
+}
+
+.tarjeta--urgente h3 {
+  color: var(--rojo);
+}
+
+.tarjeta--urgente .tarjeta__pie {
+  color: var(--rojo);
+  font-weight: bold;
+}
+
+/* ---------- 8. Acceso (login y registro) ---------- */
+.acceso {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.acceso__texto p {
+  color: var(--texto-suave);
+}
+
+.acceso__dato {
+  border-left: 3px solid var(--verde-claro);
+  padding-left: 12px;
+  font-size: .9rem;
+}
+
+.caja {
+  background-color: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.pestanas {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.pestanas__boton {
+  flex: 1;
+  background-color: var(--fondo-gris);
+  color: var(--texto-suave);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 10px;
+  font-size: .95rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.pestanas__boton.activo {
+  background-color: var(--verde);
+  border-color: var(--verde);
+  color: #FFFFFF;
+}
+
+.campo {
+  margin-bottom: 14px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+.campo input[type="text"],
+.campo input[type="email"],
+.campo input[type="password"],
+.campo select {
+  width: 100%;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 10px;
+  font-size: .95rem;
+  font-family: inherit;
+  background-color: var(--fondo);
+  color: var(--texto);
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: 2px solid var(--verde-claro);
+  outline-offset: 1px;
+}
+
+.campo__check {
+  font-weight: normal;
+  font-size: .9rem;
+}
+
+.campo__check input {
+  margin-right: 6px;
+}
+
+.pista {
+  margin: 5px 0 0;
+  font-size: .82rem;
+  color: var(--texto-suave);
+}
+
+/* El JS escribe el mensaje acá; si está vacío no se ve nada */
+.error {
+  margin: 5px 0 0;
+  font-size: .82rem;
+  color: var(--rojo);
+}
+
+/* ---------- 9. Resultado de la sesión ---------- */
+.resultado ul {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.resultado li {
+  border-bottom: 1px solid var(--borde);
+  padding: 8px 0;
+  font-size: .9rem;
+}
+
+.resultado__pie {
+  font-size: .85rem;
+  color: var(--texto-suave);
+}
+
+/* ---------- 10. Pie de página ---------- */
+.pie {
+  background-color: var(--verde);
+  color: #FFFFFF;
+  padding: 36px 0 20px;
+}
+
+.pie h2 {
+  color: #FFFFFF;
+  font-size: 1rem;
+}
+
+.pie__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 24px;
+}
+
+.pie__marca {
+  font-weight: bold;
+}
+
+.pie p {
+  font-size: .9rem;
+}
+
+.pie ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: .9rem;
+}
+
+.pie li {
+  margin-bottom: 6px;
+}
+
+.pie a {
+  color: #FFFFFF;
+}
+
+.pie__legal {
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid var(--verde-claro);
+  font-size: .82rem;
+}
+
+.pie__legal p {
+  margin: 0;
+}
+
+/* ---------- 11. Pantallas chicas ---------- */
+@media (max-width: 800px) {
+  .tarjetas {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .acceso,
+  .pie__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  h1 { font-size: 1.6rem; }
+
+  .tarjetas {
+    grid-template-columns: 1fr;
+  }
+
+  .boton {
+    display: block;
+    margin: 0 0 8px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Solicitud Ingresada con Exito</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="marca">
+    <div class="marca-icono">RA</div>
+    <div class="marca-texto">
+      <div class="marca-titulo">Red de Apoyo</div>
+      <div class="marca-subtitulo">Salud Mental Universitaria</div>
+    </div>
+  </div>
+  <nav class="navegacion">
+    <a href="#">Inicio</a>
+    <a href="solicitud_estudiante.html" class="activo">Estudiantes</a>
+    <a href="derivacion_docente.html">Profesores</a>
+    <a href="#">Consejeros</a>
+  </nav>
+  <div class="acciones-encabezado">
+    <a href="#" class="boton-emergencia">Ayuda Inmediata / Linea de Crisis</a>
+    <div class="avatar"></div>
+  </div>
+</header>
+
+<div id="confirmacion" class="contenedor-confirmacion">
+  <div class="icono-exito">&#10003;</div>
+  <h1 class="titulo-confirmacion">Solicitud Ingresada con Exito</h1>
+  <p class="subtitulo-confirmacion">Tu solicitud fue recibida y sera atendida con confidencialidad profesional. Cuidamos de tu bienestar en cada paso.</p>
+
+  <div class="tarjeta-folio">
+    <div class="tarjeta-folio-encabezado">
+      <span class="tarjeta-folio-etiqueta">Numero de folio unico</span>
+    </div>
+    <div class="tarjeta-folio-numero" id="numeroFolio">FOLIO-2026-0000-SM</div>
+
+    <div class="rejilla-datos-folio">
+      <div class="dato-folio">
+        <div class="dato-folio-etiqueta">Fecha de ingreso</div>
+        <div class="dato-folio-valor" id="fechaIngreso">--</div>
+      </div>
+      <div class="dato-folio">
+        <div class="dato-folio-etiqueta">Tipo de solicitud</div>
+        <div class="dato-folio-valor" id="tipoSolicitud">--</div>
+      </div>
+      <div class="dato-folio">
+        <div class="dato-folio-etiqueta">Prioridad inicial</div>
+        <div class="dato-folio-valor" id="prioridadInicial">Moderada</div>
+      </div>
+      <div class="dato-folio">
+        <div class="dato-folio-etiqueta">Estado actual</div>
+        <div class="dato-folio-valor" id="estadoActual">En revision</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloque-pasos">
+    <div class="bloque-pasos-titulo">Proximos Pasos</div>
+
+    <div class="paso">
+      <div class="paso-marcador hecho">&#10003;</div>
+      <div>
+        <div class="paso-titulo">Solicitud Recibida</div>
+        <div class="paso-detalle">Registrada bajo el folio indicado arriba.</div>
+      </div>
+    </div>
+
+    <div class="paso">
+      <div class="paso-marcador actual">2</div>
+      <div>
+        <div class="paso-titulo">Evaluacion Confidencial</div>
+        <div class="paso-detalle">El equipo de psicologia asigna hora para acompañarte.</div>
+      </div>
+    </div>
+
+    <div class="paso">
+      <div class="paso-marcador pendiente">3</div>
+      <div>
+        <div class="paso-titulo">Asignacion de Consejero y Cita</div>
+        <div class="paso-detalle">Recibiras hora y via de contacto por los canales institucionales.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="aviso-emergencia-confirmacion">
+    <span><strong>¿Tu situacion requiere atencion antes de las 24 horas?</strong><br>
+    Si tu malestar es inmediato o percibes riesgo emocional, contacta ahora a la Linea de Bienestar Estudiantil.</span>
+  </div>
+
+  <div class="acciones-confirmacion">
+    <button type="button" class="boton boton-primario boton-ancho" onclick="window.location.href='solicitudes.html'">Ir a Mis Solicitudes</button>
+    <button type="button" class="boton boton-secundario boton-ancho" onclick="window.location.href='solicitud_estudiante.html'">Volver al Inicio</button>
+  </div>
+</div>
+
+<div class="pie-pagina-inferior">
+  <span>© 2026 Red de Apoyo · Universidad. Todos los derechos reservados.</span>
+  <span>Privacidad · Terminos · Protocolos de Emergencia</span>
+</div>
+
+<script src="script_confirmacion.js"></script>
+
+</body>
+</html>

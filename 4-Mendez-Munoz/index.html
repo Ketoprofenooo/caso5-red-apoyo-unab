@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Seguimiento de Caso | Red de Apoyo Universitaria</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <div class="contenedor">
+            <p class="etiqueta">RED DE APOYO UNIVERSITARIA</p>
+
+            <h1>Ficha de seguimiento de caso</h1>
+
+            <p>
+                Gestión de seguimiento, citas, notificaciones y cierre
+                de solicitudes de apoyo estudiantil.
+            </p>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <a href="#caso">Caso</a>
+        <a href="#seguimiento">Seguimiento</a>
+        <a href="#citas">Citas</a>
+        <a href="#notificaciones">Notificaciones</a>
+        <a href="#cierre">Cierre</a>
+    </nav>
+
+    <main class="contenedor">
+
+        <!-- INFORMACIÓN DEL CASO -->
+        <section id="caso" class="seccion">
+
+            <div class="titulo-seccion">
+                <p class="numero">01</p>
+
+                <div>
+                    <h2>Información del caso</h2>
+                    <p>Datos generales de la solicitud seleccionada.</p>
+                </div>
+            </div>
+
+            <div class="tarjetas">
+
+                <article class="tarjeta">
+                    <span>Estudiante</span>
+                    <strong>Juan Pérez</strong>
+                </article>
+
+                <article class="tarjeta">
+                    <span>Tipo de solicitud</span>
+                    <strong>Apoyo académico</strong>
+                </article>
+
+                <article class="tarjeta">
+                    <span>Estado actual</span>
+                    <strong class="estado">En seguimiento</strong>
+                </article>
+
+                <article class="tarjeta">
+                    <span>Urgencia</span>
+                    <strong>Media</strong>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- DESCRIPCIÓN DEL PROYECTO -->
+        <section class="seccion">
+
+            <div class="titulo-seccion">
+                <p class="numero">02</p>
+
+                <div>
+                    <h2>¿Qué permite esta ficha?</h2>
+
+                    <p>
+                        Esta sección permite registrar y consultar el seguimiento
+                        de una solicitud de apoyo estudiantil, manteniendo organizada
+                        la información relacionada con citas, estados y notificaciones.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- PROBLEMA Y SOLUCIÓN -->
+        <section class="seccion doble">
+
+            <article class="bloque">
+                <h2>Problema</h2>
+
+                <p>
+                    Las solicitudes de apoyo pueden quedar dispersas entre
+                    diferentes canales, dificultando el seguimiento oportuno
+                    y la comunicación con el estudiante.
+                </p>
+            </article>
+
+            <article class="bloque">
+                <h2>Solución</h2>
+
+                <p>
+                    La plataforma centraliza el seguimiento del caso, las citas,
+                    los cambios de estado y las notificaciones, facilitando
+                    una gestión ordenada de cada solicitud.
+                </p>
+            </article>
+
+        </section>
+
+
+        <!-- SEGUIMIENTO -->
+        <section id="seguimiento" class="seccion">
+
+            <div class="titulo-seccion">
+                <p class="numero">03</p>
+
+                <div>
+                    <h2>Línea de tiempo del caso</h2>
+
+                    <p>
+                        Registro de las principales acciones realizadas.
+                    </p>
+                </div>
+            </div>
+
+            <div class="linea-tiempo">
+
+                <article class="evento">
+                    <div class="punto"></div>
+
+                    <div>
+                        <h3>Solicitud recibida</h3>
+                        <p>28/08/2026 · Se registra la solicitud de apoyo.</p>
+                    </div>
+                </article>
+
+                <article class="evento">
+                    <div class="punto"></div>
+
+                    <div>
+                        <h3>Profesional asignado</h3>
+                        <p>29/08/2026 · Se asigna un profesional de apoyo.</p>
+                    </div>
+                </article>
+
+                <article class="evento">
+                    <div class="punto"></div>
+
+                    <div>
+                        <h3>Primera atención realizada</h3>
+                        <p>02/09/2026 · Se registra la primera atención.</p>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- OBSERVACIONES -->
+        <section class="seccion">
+
+            <div class="titulo-seccion">
+                <p class="numero">04</p>
+
+                <div>
+                    <h2>Observaciones de seguimiento</h2>
+
+                    <p>
+                        Esta información está disponible solamente para perfiles autorizados.
+                    </p>
+                </div>
+            </div>
+
+            <div class="control-rol">
+
+                <label for="rol">Perfil de usuario:</label>
+
+                <select id="rol">
+                    <option value="profesional">Profesional de apoyo</option>
+                    <option value="estudiante">Estudiante</option>
+                </select>
+
+            </div>
+
+            <div id="observaciones" class="observaciones">
+                <h3>Observaciones internas</h3>
+
+                <p>
+                    Se realizó seguimiento de la situación académica y se acordó
+                    revisar nuevamente el caso en la próxima cita.
+                </p>
+            </div>
+
+            <p id="mensajePrivacidad" class="mensaje"></p>
+
+        </section>
+
+
+        <!-- CITAS -->
+        <section id="citas" class="seccion">
+
+            <div class="titulo-seccion">
+                <p class="numero">05</p>
+
+                <div>
+                    <h2>Citas y estado de atención</h2>
+
+                    <p>
+                        Registro de las atenciones asociadas al caso.
+                    </p>
+                </div>
+            </div>
+
+            <div class="tabla-contenedor">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo</th>
+                            <th>Profesional</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>02/09/2026</td>
+                            <td>Orientación</td>
+                            <td>Profesional de apoyo</td>
+                            <td><span class="estado-tabla">Realizada</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>09/09/2026</td>
+                            <td>Seguimiento</td>
+                            <td>Profesional de apoyo</td>
+                            <td><span class="estado-tabla pendiente">Programada</span></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- NOTIFICACIONES -->
+        <section id="notificaciones" class="seccion">
+
+            <div class="titulo-seccion">
+                <p class="numero">06</p>
+
+                <div>
+                    <h2>Notificaciones al estudiante</h2>
+
+                    <p>
+                        Información sobre el estado y las próximas actividades del caso.
+                    </p>
+                </div>
+            </div>
+
+            <div class="notificaciones">
+
+                <article class="notificacion">
+                    <span class="icono">✓</span>
+
+                    <div>
+                        <strong>Solicitud recibida</strong>
+
+                        <p>
+                            Tu solicitud fue recibida correctamente.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="notificacion">
+                    <span class="icono">✓</span>
+
+                    <div>
+                        <strong>Profesional asignado</strong>
+
+                        <p>
+                            Se asignó un profesional para realizar el seguimiento.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="notificacion">
+                    <span class="icono">!</span>
+
+                    <div>
+                        <strong>Cita programada</strong>
+
+                        <p>
+                            Tienes una cita de seguimiento el 09/09/2026.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- FUNCIONALIDADES -->
+        <section class="seccion">
+
+            <div class="titulo-seccion">
+                <p class="numero">07</p>
+
+                <div>
+                    <h2>Funcionalidades disponibles</h2>
+
+                    <p>
+                        Acciones principales de esta ficha de caso.
+                    </p>
+                </div>
+            </div>
+
+            <div class="funcionalidades">
+
+                <article>
+                    <h3>Seguimiento</h3>
+                    <p>Permite registrar las acciones realizadas durante el caso.</p>
+                </article>
+
+                <article>
+                    <h3>Citas</h3>
+                    <p>Permite visualizar las atenciones realizadas y programadas.</p>
+                </article>
+
+                <article>
+                    <h3>Notificaciones</h3>
+                    <p>Informa al estudiante sobre cambios importantes del caso.</p>
+                </article>
+
+                <article>
+                    <h3>Cierre</h3>
+                    <p>Permite registrar el motivo de cierre y una posible derivación.</p>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- CIERRE DEL CASO -->
+        <section id="cierre" class="seccion cierre">
+
+            <div class="titulo-seccion">
+
+                <p class="numero">08</p>
+
+                <div>
+                    <h2>Cierre del caso</h2>
+
+                    <p>
+                        Registra el motivo de cierre y si se realizó una derivación.
+                    </p>
+                </div>
+
+            </div>
+
+            <form id="formularioCierre">
+
+                <div class="campo">
+
+                    <label for="motivo">
+                        Motivo de cierre
+                    </label>
+
+                    <select id="motivo" required>
+
+                        <option value="">
+                            Seleccionar motivo
+                        </option>
+
+                        <option value="Objetivo cumplido">
+                            Objetivo cumplido
+                        </option>
+
+                        <option value="Derivación realizada">
+                            Derivación realizada
+                        </option>
+
+                        <option value="Solicitud finalizada">
+                            Solicitud finalizada
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="derivacion">
+                        ¿Se realizó una derivación?
+                    </label>
+
+                    <select id="derivacion" required>
+
+                        <option value="">
+                            Seleccionar opción
+                        </option>
+
+                        <option value="Sí">
+                            Sí
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button type="submit">
+                    Registrar cierre
+                </button>
+
+                <p id="mensajeFormulario" class="mensaje"></p>
+
+            </form>
+
+
+            <!-- AQUÍ APARECEN LOS DATOS SELECCIONADOS -->
+            <div id="resultado" class="resultado">
+
+                <h3>Información del cierre</h3>
+
+                <p id="resultadoMotivo"></p>
+
+                <p id="resultadoDerivacion"></p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Red de Apoyo y Salud Mental Universitaria
+        </p>
+
+        <p>
+            Prototipo académico · Datos ficticios
+        </p>
+
+    </footer>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
