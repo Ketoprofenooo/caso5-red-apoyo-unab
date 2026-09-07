@@ -128,7 +128,6 @@ a {
   background-color: var(--verde);
   color: #FFFFFF;
   border: 1px solid var(--verde);
-  border-radius: 6px;
   padding: 11px 20px;
   margin-right: 8px;
   font-size: .95rem;
@@ -163,7 +162,6 @@ a {
 .aviso {
   border: 1px solid var(--rojo);
   border-left: 5px solid var(--rojo);
-  border-radius: 6px;
   background-color: #FBF3F1;
   padding: 14px 16px;
   margin: 24px 0 0;
@@ -197,10 +195,14 @@ a {
   list-style: none;
 }
 
+/* La sección de páginas del sistema son cuatro, no seis */
+.tarjetas--cuatro {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .tarjeta {
   background-color: var(--fondo);
   border: 1px solid var(--borde);
-  border-radius: 8px;
   padding: 18px;
 }
 
@@ -251,7 +253,6 @@ a {
 .caja {
   background-color: var(--fondo);
   border: 1px solid var(--borde);
-  border-radius: 8px;
   padding: 20px;
 }
 
@@ -266,7 +267,6 @@ a {
   background-color: var(--fondo-gris);
   color: var(--texto-suave);
   border: 1px solid var(--borde);
-  border-radius: 6px;
   padding: 10px;
   font-size: .95rem;
   font-family: inherit;
@@ -296,7 +296,6 @@ a {
 .campo select {
   width: 100%;
   border: 1px solid var(--borde);
-  border-radius: 6px;
   padding: 10px;
   font-size: .95rem;
   font-family: inherit;

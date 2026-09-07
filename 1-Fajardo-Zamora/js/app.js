@@ -4,7 +4,7 @@
    José Fajardo Zamora
 
    Lo que hace este archivo:
-   1. Arma las tarjetas de perfiles con map()
+   1. Arma las tarjetas de las páginas con map()
    2. Cambia entre las pestañas Entrar y Crear cuenta
    3. Valida los dos formularios
    4. Simula la sesión con localStorage
@@ -12,58 +12,54 @@
    ============================================================ */
 
 
-/* ---------- 1. Datos de los perfiles y sus páginas ---------- */
-// Cada perfil apunta a la página del integrante que la hizo.
-const perfiles = [
+/* ---------- 1. Las cuatro páginas del sistema ---------- */
+// Esta portada es la quinta. Cada página dice qué perfiles la usan, para
+// poder mandar a cada quien a la suya después de iniciar sesión.
+const paginas = [
   {
-    nombre: "Estudiante",
-    texto: "Crea su solicitud de apoyo, revisa en qué va y se inscribe en los talleres.",
-    pagina: "Solicitud de apoyo",
+    nombre: "Solicitud y derivación",
+    texto: "El estudiante pide apoyo con sus palabras y el docente deriva de forma responsable.",
     integrante: "Alfaro Sánchez",
-    destino: "2-Alfaro-Sanchez/solicitud_estudiante.html"
+    destino: "2-Alfaro-Sanchez/solicitud_estudiante.html",
+    perfiles: ["Estudiante", "Docente derivador"],
+    // El docente entra al mismo lugar, pero a su propio formulario
+    destinoDocente: "2-Alfaro-Sanchez/derivacion_docente.html"
   },
   {
-    nombre: "Docente derivador",
-    texto: "Deriva a un estudiante con el formulario responsable, sin entrar a su ficha.",
-    pagina: "Derivación docente",
-    integrante: "Alfaro Sánchez",
-    destino: "2-Alfaro-Sanchez/derivacion_docente.html"
-  },
-  {
-    nombre: "Consejero / Orientador",
-    texto: "Clasifica lo que llega y se lo asigna al profesional que corresponde.",
-    pagina: "Bandeja del orientador",
+    nombre: "Bandeja del orientador",
+    texto: "Clasificar lo que va llegando y asignárselo al profesional que corresponde.",
     integrante: "Briones Osorio",
-    destino: "3-Briones-Osorio/index.html"
+    destino: "3-Briones-Osorio/index.html",
+    perfiles: ["Consejero / Orientador"]
   },
   {
-    nombre: "Profesional de apoyo",
-    texto: "Registra citas, estados y observaciones de los casos que tiene asignados.",
-    pagina: "Ficha de seguimiento",
+    nombre: "Ficha de seguimiento",
+    texto: "Citas, estados y observaciones de cada caso, hasta que se puede cerrar.",
     integrante: "Méndez Muñoz",
-    destino: "4-Mendez-Munoz/index.html"
+    destino: "4-Mendez-Munoz/index.html",
+    perfiles: ["Profesional de apoyo"]
   },
   {
-    nombre: "Administrador de bienestar",
-    texto: "Mantenedores, talleres y reportes agregados, sin datos de personas.",
-    pagina: "Talleres y reportes",
+    nombre: "Talleres y reportes",
+    texto: "Inscripción a talleres, mantenedores y reportes agregados, sin datos de personas.",
     integrante: "Mena Navea",
-    destino: "5-Mena-Navea/index.html"
+    destino: "5-Mena-Navea/index.html",
+    perfiles: ["Administrador de bienestar"]
   }
 ];
 
 
 /* ---------- 2. Pintar las tarjetas con map() ---------- */
-const listaPerfiles = document.querySelector("#listaPerfiles");
+const listaPaginas = document.querySelector("#listaPaginas");
 
-listaPerfiles.innerHTML = perfiles
+listaPaginas.innerHTML = paginas
   .map((p) => `
     <li class="tarjeta">
       <h3>${p.nombre}</h3>
       <p>${p.texto}</p>
       <p class="tarjeta__pie">
-        <a href="${p.destino}">Ir a ${p.pagina}</a><br>
-        Página de ${p.integrante}
+        <a href="${p.destino}">Entrar a esta página</a><br>
+        La hizo ${p.integrante}
       </p>
     </li>`)
   .join("");
@@ -192,11 +188,14 @@ function mostrarResultado(titulo, perfil, datos, pie) {
     : pie;
 
   // Busco en el arreglo el perfil que eligió, para ofrecerle su pantalla.
-  const elegido = perfiles.find((p) => p.nombre === perfil);
+  const elegido = paginas.find((p) => p.perfiles.includes(perfil));
 
   if (elegido && pie === "") {
-    enlacePanel.href = elegido.destino;
-    enlacePanel.textContent = "Ir a " + elegido.pagina;
+    // Si el perfil es docente y esa página tiene formulario aparte, va a ese
+    enlacePanel.href = perfil === "Docente derivador" && elegido.destinoDocente
+      ? elegido.destinoDocente
+      : elegido.destino;
+    enlacePanel.textContent = "Ir a " + elegido.nombre;
     enlacePanel.classList.remove("oculto");
   } else {
     enlacePanel.classList.add("oculto");
