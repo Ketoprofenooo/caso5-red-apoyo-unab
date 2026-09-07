@@ -27,10 +27,7 @@ en `1-Fajardo-Zamora/`.
 El profesor liberó la consistencia visual entre páginas: cada integrante propone
 una dirección de diseño distinta y en la entrega 2 se elige una.
 
-## Pendiente conocido
-
-`3-Briones-Osorio/` no incluye su `app.js`, así que la bandeja carga con los
-contadores en cero y los filtros no responden. El diseño sí está.
+Las cinco pantallas están completas y navegables.
 
 ## Aviso del caso
 
