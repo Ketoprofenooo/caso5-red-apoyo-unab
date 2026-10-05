@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Tema común para las cinco páginas.
+   Parte de la paleta verde institucional del home de la Entrega 1
+   (Fajardo Zamora) y la vuelve variables de Tailwind: así se puede
+   escribir bg-verde, text-texto-suave, border-borde, etc.
+   ============================================================ */
+@theme {
+  --color-verde: #14403C;
+  --color-verde-medio: #2F6656;
+  --color-verde-claro: #4F7C6E;
+  --color-menta: #DCEBE4;
+  --color-fondo: #FFFFFF;
+  --color-fondo-gris: #F4F5F2;
+  --color-texto: #1E2A28;
+  --color-texto-suave: #55635F;
+  --color-borde: #D9DED9;
+  --color-rojo: #9B3B2E;
+  --color-rojo-fondo: #FBF3F1;
+  --color-ambar: #8A5A12;
+  --color-ambar-fondo: #FBF4E6;
+
+  --font-titulo: "Fraunces", Georgia, serif;
+  --font-cuerpo: "Inter", "Segoe UI", Arial, sans-serif;
+
+  /* Los breakpoints del grupo: 720px (md) y 1000px (lg) */
+  --breakpoint-md: 45rem;
+  --breakpoint-lg: 62.5rem;
+}
+
+/* Estilos base que aplican a toda la aplicación */
+@layer base {
+  body {
+    @apply bg-fondo font-cuerpo text-texto leading-relaxed antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-titulo text-verde leading-tight;
+  }
+
+  /* Al saltar a un #ancla, que no quede tapada por el header fijo */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* Clases propias que se repiten en todas las páginas.
+   Con @apply se juntan varias utilidades de Tailwind bajo un solo nombre. */
+@layer components {
+  .contenedor {
+    @apply mx-auto w-full max-w-6xl px-4 md:px-6;
+  }
+
+  .boton {
+    @apply inline-flex items-center justify-center gap-2 border border-verde bg-verde px-5 py-2.5
+      text-[0.95rem] font-medium text-white transition-colors
+      hover:border-verde-claro hover:bg-verde-claro
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .boton-claro {
+    @apply inline-flex items-center justify-center gap-2 border border-verde bg-transparent px-5 py-2.5
+      text-[0.95rem] font-medium text-verde transition-colors hover:bg-fondo-gris;
+  }
+
+  .boton-blanco {
+    @apply inline-flex items-center justify-center gap-2 border border-white/70 bg-transparent px-5 py-2.5
+      text-[0.95rem] font-medium text-white transition-colors hover:bg-white hover:text-verde;
+  }
+
+  .entrada {
+    @apply w-full border border-borde bg-fondo px-3 py-2.5 text-[0.95rem] text-texto
+      focus:outline-2 focus:outline-offset-1 focus:outline-verde-claro;
+  }
+}
+
+/* Toda animación se apaga si la persona pidió menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
