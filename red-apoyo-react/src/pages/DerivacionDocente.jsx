@@ -9,6 +9,7 @@ import PasoFormulario from '../components/PasoFormulario'
 import GrupoOpciones from '../components/GrupoOpciones'
 import OpcionTarjeta from '../components/OpcionTarjeta'
 import Campo from '../components/Campo'
+import AreaTexto from '../components/solicitud/AreaTexto'
 import { dialogoPrevio, senalesAlerta, urgenciasDocente } from '../data/solicitudes'
 import { imagenes } from '../data/imagenes'
 import { agregarSolicitud, crearFolio } from '../utils/almacenamiento'
@@ -120,19 +121,14 @@ function DerivacionDocente({ sesion }) {
           </PasoFormulario>
 
           <PasoFormulario numero="3" titulo="Descripción de lo observado" ayuda="Hechos concretos y observables, escritos con respeto. Sin diagnósticos.">
-            <textarea
-              name="descripcion"
-              rows="5"
-              maxLength={MAX_DESCRIPCION}
-              aria-label="Descripción de lo observado"
-              value={datos.descripcion}
-              onChange={manejarCambio}
-              className="entrada"
+            <AreaTexto
+              nombre="descripcion"
+              etiqueta="Descripción de lo observado"
+              valor={datos.descripcion}
+              alCambiar={manejarCambio}
+              maximo={MAX_DESCRIPCION}
+              error={errores.descripcion}
             />
-            <div className="mt-1 flex justify-between text-sm">
-              <span className="text-rojo">{errores.descripcion}</span>
-              <span className="text-texto-suave">{datos.descripcion.length} / {MAX_DESCRIPCION}</span>
-            </div>
           </PasoFormulario>
 
           <PasoFormulario numero="4" titulo="Prioridad y conversación previa">

@@ -30,3 +30,9 @@ export const profesionales = ['Ana Martínez', 'Pedro Ruiz', 'José Díaz']
 
 // Para ordenar por urgencia: un número por cada nivel
 export const pesoUrgencia = { alta: 3, media: 2, baja: 1 }
+
+// De 'economico' a 'Económico', para mostrarlo en pantalla
+export const nombreTipo = (valor) => {
+  const tipo = tipos.find((t) => t.valor === valor)
+  return tipo ? tipo.nombre : valor
+}

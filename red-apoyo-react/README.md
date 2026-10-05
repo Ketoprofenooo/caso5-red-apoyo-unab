@@ -89,7 +89,11 @@ red-apoyo-react/
     │   ├── Kpi.jsx             número destacado
     │   ├── Modal.jsx           ventana emergente
     │   ├── SubirAlCambiar.jsx  scroll al cambiar de página
-    │   └── inicio/             piezas que solo usa el home
+    │   ├── inicio/             Acceso, FormIngreso, FormRegistro, Resultado, Respiracion
+    │   ├── solicitud/          AreaTexto, QuePasaDespues
+    │   ├── bandeja/            FiltrosBandeja, TablaSolicitudes, Paginacion, ModalAsignacion
+    │   ├── ficha/              LineaTiempo, Observaciones, TablaCitas, Aviso, FormCierre
+    │   └── talleres/           TallerTarjeta, PanelMantenedores, PanelReportes, TablaBitacora
     ├── pages/              una por pantalla
     ├── data/               datos de prueba (arreglos y objetos)
     └── utils/              localStorage con try/catch y validaciones
@@ -99,11 +103,11 @@ red-apoyo-react/
 
 | Página | Ruta | Integrante | Requisitos |
 |---|---|---|---|
-| `Inicio.jsx` | `/` | Fajardo Zamora | RF1, CU1: home, login y registro |
-| `SolicitudEstudiante.jsx`, `DerivacionDocente.jsx`, `Confirmacion.jsx`, `MisSolicitudes.jsx` | `/solicitud`, `/derivacion`, `/confirmacion`, `/mis-solicitudes` | Alfaro Sánchez | RF2, RF3 |
-| `Bandeja.jsx` | `/bandeja` | Briones Osorio | RF4, RF5 |
-| `FichaCaso.jsx` | `/ficha` | Méndez Muñoz | RF6, RF7, RF11 |
-| `Talleres.jsx` | `/talleres` | Mena Navea | RF8, RF9, RF10, RF12 |
+| `Inicio.jsx` + `components/inicio/` | `/` | Fajardo Zamora | RF1, CU1: home, login y registro |
+| `SolicitudEstudiante.jsx`, `DerivacionDocente.jsx`, `Confirmacion.jsx`, `MisSolicitudes.jsx` + `components/solicitud/` | `/solicitud`, `/derivacion`, `/confirmacion`, `/mis-solicitudes` | Alfaro Sánchez | RF2, RF3 |
+| `Bandeja.jsx` + `components/bandeja/` | `/bandeja` | Briones Osorio | RF4, RF5 |
+| `FichaCaso.jsx` + `components/ficha/` | `/ficha` | Méndez Muñoz | RF6, RF7, RF11 |
+| `Talleres.jsx` + `components/talleres/` | `/talleres` | Mena Navea | RF8, RF9, RF10, RF12 |
 
 ## Flujo conectado
 

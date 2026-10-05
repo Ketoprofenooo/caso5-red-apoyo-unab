@@ -8,6 +8,8 @@ import EncabezadoPagina from '../components/EncabezadoPagina'
 import PasoFormulario from '../components/PasoFormulario'
 import GrupoOpciones from '../components/GrupoOpciones'
 import Campo from '../components/Campo'
+import AreaTexto from '../components/solicitud/AreaTexto'
+import QuePasaDespues from '../components/solicitud/QuePasaDespues'
 import { tiposApoyo } from '../data/inicio'
 import { modalidades, urgenciasEstudiante } from '../data/solicitudes'
 import { imagenes } from '../data/imagenes'
@@ -103,21 +105,15 @@ function SolicitudEstudiante({ sesion }) {
           </PasoFormulario>
 
           <PasoFormulario numero="2" titulo="Descripción breve" ayuda="Explica con tus palabras qué está pasando o en qué te gustaría apoyo." requerido>
-            <textarea
-              id="descripcion"
-              name="descripcion"
-              aria-label="Descripción breve"
-              rows="5"
-              maxLength={MAX_DESCRIPCION}
+            <AreaTexto
+              nombre="descripcion"
+              etiqueta="Descripción breve"
+              valor={datos.descripcion}
+              alCambiar={manejarCambio}
+              maximo={MAX_DESCRIPCION}
               placeholder="Ejemplo: me cuesta concentrarme, duermo mal y me pongo muy ansioso antes de las pruebas."
-              value={datos.descripcion}
-              onChange={manejarCambio}
-              className="entrada"
+              error={errores.descripcion}
             />
-            <div className="mt-1 flex justify-between text-sm">
-              <span className="text-rojo">{errores.descripcion}</span>
-              <span className="text-texto-suave">{datos.descripcion.length} / {MAX_DESCRIPCION}</span>
-            </div>
           </PasoFormulario>
 
           <PasoFormulario numero="3" titulo="Urgencia percibida" ayuda="Nos ayuda a coordinar la cita con la prioridad adecuada." requerido>
@@ -178,23 +174,7 @@ function SolicitudEstudiante({ sesion }) {
           </div>
         </form>
 
-        <aside className="space-y-5 text-sm">
-          <div className="border border-borde bg-fondo-gris p-5">
-            <h2 className="text-xl">Qué pasa después</h2>
-            <ol className="mt-3 list-decimal space-y-2 pl-5 text-texto-suave">
-              <li>Recibes un folio para seguir tu solicitud.</li>
-              <li>Un orientador la revisa y la asigna.</li>
-              <li>Te contactan para agendar la primera cita.</li>
-            </ol>
-          </div>
-          <div className="border border-rojo bg-rojo-fondo p-5">
-            <h2 className="text-xl text-rojo">¿Es ahora?</h2>
-            <p className="mt-2">
-              Si sientes que no puedes esperar, no uses este formulario: llama a Salud Responde{' '}
-              <strong>600 360 7777</strong> o a Emergencias <strong>131</strong>.
-            </p>
-          </div>
-        </aside>
+        <QuePasaDespues />
       </div>
     </>
   )
