@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom'
 import Insignia from '../Insignia'
 import { nombreTipo } from '../../data/bandeja'
 import { nombreUrgencia } from '../../data/solicitudes'
-import { tonoEstado, tonoUrgencia } from '../../data/tonos'
+import { nombreEstado, tonoEstado, tonoUrgencia } from '../../data/tonos'
 
 // Muestra las solicitudes de la página actual: tabla en computador y
 // tarjetas en celular. alAsignar avisa a la página qué fila se eligió.
@@ -14,7 +15,8 @@ function TablaSolicitudes({ solicitudes, alAsignar }) {
     )
   }
 
-  const textoBoton = (s) => (s.profesional ? 'Reasignar' : 'Asignar')
+  const textoBoton = (s) => (s.profesional ? 'Reasignar' : 'Clasificar y asignar')
+  const cerrada = (s) => s.estado === 'cerrada'
 
   return (
     <>
@@ -23,7 +25,7 @@ function TablaSolicitudes({ solicitudes, alAsignar }) {
         <table className="w-full text-left text-sm">
           <thead className="bg-fondo-gris text-texto-suave">
             <tr>
-              <th className="p-3 font-semibold">ID</th>
+              <th className="p-3 font-semibold">Folio</th>
               <th className="p-3 font-semibold">Estudiante</th>
               <th className="p-3 font-semibold">Tipo</th>
               <th className="p-3 font-semibold">Estado</th>
@@ -35,18 +37,21 @@ function TablaSolicitudes({ solicitudes, alAsignar }) {
           <tbody className="divide-y divide-borde">
             {solicitudes.map((s) => (
               <tr key={s.id} className="hover:bg-fondo-gris/60">
-                <td className="p-3 font-mono text-xs">{s.id}</td>
+                <td className="p-3 font-mono text-xs">{s.folio}</td>
                 <td className="p-3">
-                  {s.estudiante} {s.nueva && <Insignia texto="nueva" tono="verde" />}
+                  {s.estudiante} {s.origen === 'derivacion' && <Insignia texto="derivada" tono="gris" />}
                 </td>
                 <td className="p-3">{nombreTipo(s.tipo)}</td>
-                <td className="p-3"><Insignia texto={s.estado} tono={tonoEstado[s.estado]} /></td>
+                <td className="p-3"><Insignia texto={nombreEstado[s.estado]} tono={tonoEstado[s.estado]} /></td>
                 <td className="p-3"><Insignia texto={nombreUrgencia[s.urgencia]} tono={tonoUrgencia[s.urgencia]} /></td>
                 <td className="p-3 text-texto-suave">{s.profesional || '—'}</td>
-                <td className="p-3 text-right">
-                  <button type="button" onClick={() => alAsignar(s)} className="boton px-3 py-1.5 text-sm">
-                    {textoBoton(s)}
-                  </button>
+                <td className="whitespace-nowrap p-3 text-right">
+                  <Link to={`/ficha/${s.id}`} className="mr-3 text-sm text-verde underline">Ficha</Link>
+                  {!cerrada(s) && (
+                    <button type="button" onClick={() => alAsignar(s)} className="boton px-3 py-1.5 text-sm">
+                      {textoBoton(s)}
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
@@ -62,12 +67,17 @@ function TablaSolicitudes({ solicitudes, alAsignar }) {
               <p className="font-semibold">{s.estudiante}</p>
               <Insignia texto={nombreUrgencia[s.urgencia]} tono={tonoUrgencia[s.urgencia]} />
             </div>
-            <p className="mt-1 text-sm text-texto-suave">{s.id} · {nombreTipo(s.tipo)}</p>
-            <div className="mt-3 flex items-center justify-between">
-              <Insignia texto={s.estado} tono={tonoEstado[s.estado]} />
-              <button type="button" onClick={() => alAsignar(s)} className="boton px-3 py-1.5 text-sm">
-                {textoBoton(s)}
-              </button>
+            <p className="mt-1 text-sm text-texto-suave">{s.folio} · {nombreTipo(s.tipo)}</p>
+            <div className="mt-3 flex items-center justify-between gap-2">
+              <Insignia texto={nombreEstado[s.estado]} tono={tonoEstado[s.estado]} />
+              <span>
+                <Link to={`/ficha/${s.id}`} className="mr-3 text-sm text-verde underline">Ficha</Link>
+                {!cerrada(s) && (
+                  <button type="button" onClick={() => alAsignar(s)} className="boton px-3 py-1.5 text-sm">
+                    {textoBoton(s)}
+                  </button>
+                )}
+              </span>
             </div>
           </li>
         ))}

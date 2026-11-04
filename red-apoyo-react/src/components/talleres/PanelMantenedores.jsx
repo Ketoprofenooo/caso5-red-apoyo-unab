@@ -1,18 +1,27 @@
-// Mantenedores del sistema. Administrar requiere backend,
-// por eso el botón se muestra deshabilitado.
-function PanelMantenedores({ mantenedores }) {
+import { categoriasMaestro } from '../../data/talleres'
+
+// Mantenedores del sistema (RF9): tipos de solicitud, sedes y unidades.
+// Vienen de GET /api/maestros, una sola coleccion separada por `categoria`.
+function PanelMantenedores({ maestros }) {
   return (
     <div className="grid gap-5 md:grid-cols-3">
-      {mantenedores.map((m) => (
-        <div key={m.id} className="border border-borde p-5">
-          <h3 className="text-xl">{m.titulo}</h3>
-          <p className="mt-2 text-sm text-texto-suave">{m.texto}</p>
-          <p className="mt-4 font-titulo text-2xl text-verde">{m.total}</p>
-          <button type="button" disabled className="boton-claro mt-4 w-full">
-            Administrar (requiere backend)
-          </button>
-        </div>
-      ))}
+      {Object.keys(categoriasMaestro).map((categoria) => {
+        const registros = maestros.filter((m) => m.categoria === categoria)
+        return (
+          <div key={categoria} className="border border-borde p-5">
+            <h3 className="text-xl">{categoriasMaestro[categoria]}</h3>
+            <p className="mt-1 font-titulo text-2xl text-verde">{registros.length}</p>
+            <ul className="mt-3 space-y-1 text-sm">
+              {registros.map((m) => (
+                <li key={m._id}>
+                  {m.nombre}
+                  {m.descripcion && <span className="text-texto-suave"> · {m.descripcion}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      })}
     </div>
   )
 }

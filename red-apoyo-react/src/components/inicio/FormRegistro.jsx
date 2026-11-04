@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Campo from '../Campo'
+import { registroRequest } from '../../api/auth'
+import { mensajeDeError } from '../../api/axios'
 import { perfiles } from '../../data/usuarios'
 import { claveValida, correoInstitucional, correoValido, sinErrores } from '../../utils/validaciones'
 
@@ -8,6 +10,7 @@ const vacio = { nombre: '', correo: '', perfil: '', unidad: '', clave: '', clave
 function FormRegistro({ alRegistrar }) {
   const [datos, setDatos] = useState(vacio)
   const [errores, setErrores] = useState({})
+  const [errorServidor, setErrorServidor] = useState('')
 
   // El checkbox guarda checked (true/false); el resto guarda value.
   const manejarCambio = (e) => {
@@ -15,8 +18,9 @@ function FormRegistro({ alRegistrar }) {
     setDatos({ ...datos, [name]: type === 'checkbox' ? checked : value })
   }
 
-  const manejarEnvio = (e) => {
+  const manejarEnvio = async (e) => {
     e.preventDefault()
+    setErrorServidor('')
     const correo = datos.correo.trim()
 
     const nuevosErrores = {
@@ -35,9 +39,21 @@ function FormRegistro({ alRegistrar }) {
 
     setErrores(nuevosErrores)
 
-    if (sinErrores(nuevosErrores)) {
-      alRegistrar({ nombre: datos.nombre.trim(), correo, perfil: datos.perfil, unidad: datos.unidad.trim() })
+    if (!sinErrores(nuevosErrores)) return
+
+    try {
+      // POST /api/auth/registro. El backend vuelve a validar y cifra la clave.
+      const respuesta = await registroRequest({
+        nombre: datos.nombre.trim(),
+        email: correo,
+        password: datos.clave,
+        perfil: datos.perfil,
+        unidad: datos.unidad.trim(),
+      })
+      alRegistrar({ ...respuesta.data.usuario, unidad: datos.unidad.trim(), mensaje: respuesta.data.mensaje })
       setDatos(vacio)
+    } catch (error) {
+      setErrorServidor(mensajeDeError(error))
     }
   }
 
@@ -64,7 +80,7 @@ function FormRegistro({ alRegistrar }) {
           <select id="registroPerfil" name="perfil" value={datos.perfil} onChange={manejarCambio} className="entrada">
             <option value="">Elige tu perfil</option>
             {perfiles.map((p) => (
-              <option key={p.valor} value={p.valor}>{p.valor}</option>
+              <option key={p.valor} value={p.valor}>{p.nombre}</option>
             ))}
           </select>
         </Campo>
@@ -104,6 +120,10 @@ function FormRegistro({ alRegistrar }) {
         </label>
         {errores.pauta && <p className="mt-1 text-sm text-rojo">{errores.pauta}</p>}
       </div>
+
+      {errorServidor && (
+        <p className="mb-4 border border-rojo bg-rojo-fondo px-3 py-2 text-sm text-rojo">{errorServidor}</p>
+      )}
 
       <button type="submit" className="boton w-full">Crear cuenta</button>
     </form>

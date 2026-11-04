@@ -105,7 +105,7 @@ function Inicio({ sesion, alIniciarSesion, alCerrarSesion }) {
               No hay registro con correos personales.
             </p>
             <p className="mt-4 border-l-4 border-verde-claro pl-3 text-sm text-texto-suave">
-              La sesión se cierra sola a los 20 minutos sin actividad.
+              La sesión se cierra sola a los 20 minutos de haber entrado.
             </p>
             <img
               src={imagenes.acceso}

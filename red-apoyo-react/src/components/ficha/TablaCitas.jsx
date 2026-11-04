@@ -1,26 +1,27 @@
-import Insignia from '../Insignia'
-import { tonoEstado } from '../../data/tonos'
+import { fechaHora } from '../../data/tonos'
 
-// Tabla con las citas del caso. Recibe el arreglo por props.
+// Tabla con las citas del caso: son los seguimientos de tipo "cita".
 function TablaCitas({ citas }) {
+  if (citas.length === 0) {
+    return <p className="border border-dashed border-borde p-6 text-sm text-texto-suave">Todavía no hay citas agendadas.</p>
+  }
+
   return (
     <div className="overflow-x-auto border border-borde bg-fondo">
       <table className="w-full text-left text-sm">
         <thead className="bg-fondo-gris text-texto-suave">
           <tr>
-            <th className="p-3 font-semibold">Fecha</th>
-            <th className="p-3 font-semibold">Tipo</th>
-            <th className="p-3 font-semibold">Profesional</th>
-            <th className="p-3 font-semibold">Estado</th>
+            <th className="p-3 font-semibold">Registrada el</th>
+            <th className="p-3 font-semibold">Detalle</th>
+            <th className="p-3 font-semibold">Por</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-borde">
           {citas.map((cita) => (
-            <tr key={cita.id}>
-              <td className="p-3">{cita.fecha}</td>
-              <td className="p-3">{cita.tipo}</td>
-              <td className="p-3">{cita.profesional}</td>
-              <td className="p-3"><Insignia texto={cita.estado} tono={tonoEstado[cita.estado]} /></td>
+            <tr key={cita._id}>
+              <td className="whitespace-nowrap p-3">{fechaHora(cita.fecha)}</td>
+              <td className="p-3">{cita.detalle}</td>
+              <td className="p-3">{cita.autor ? cita.autor.nombre : '—'}</td>
             </tr>
           ))}
         </tbody>

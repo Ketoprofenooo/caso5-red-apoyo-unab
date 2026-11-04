@@ -1,16 +1,8 @@
 // Datos de la bandeja del orientador (Briones Osorio).
+// Las solicitudes y los profesionales ahora vienen del backend.
+import { nombreEstado } from './tonos'
 
-export const solicitudesDemo = [
-  { id: 'SOL-001', estudiante: 'Juan Pérez', tipo: 'emocional', estado: 'pendiente', urgencia: 'alta', profesional: '' },
-  { id: 'SOL-002', estudiante: 'María López', tipo: 'academico', estado: 'asignada', urgencia: 'media', profesional: 'Ana Martínez' },
-  { id: 'SOL-003', estudiante: 'Carlos Gómez', tipo: 'social', estado: 'resuelta', urgencia: 'baja', profesional: 'José Díaz' },
-  { id: 'SOL-004', estudiante: 'Ana Díaz', tipo: 'economico', estado: 'pendiente', urgencia: 'alta', profesional: '' },
-  { id: 'SOL-005', estudiante: 'Pedro Silva', tipo: 'social', estado: 'asignada', urgencia: 'media', profesional: 'Pedro Ruiz' },
-  { id: 'SOL-006', estudiante: 'Valentina Muñoz', tipo: 'convivencia', estado: 'pendiente', urgencia: 'media', profesional: '' },
-  { id: 'SOL-007', estudiante: 'Tomás Herrera', tipo: 'academico', estado: 'pendiente', urgencia: 'baja', profesional: '' },
-  { id: 'SOL-008', estudiante: 'Fernanda Castro', tipo: 'emocional', estado: 'asignada', urgencia: 'alta', profesional: 'Ana Martínez' },
-]
-
+// Los mismos tipos que acepta el backend en PUT /solicitudes/:id/clasificar
 export const tipos = [
   { valor: 'emocional', nombre: 'Emocional' },
   { valor: 'academico', nombre: 'Académico' },
@@ -20,19 +12,28 @@ export const tipos = [
   { valor: 'otro', nombre: 'Otro' },
 ]
 
-export const estados = [
-  { valor: 'pendiente', nombre: 'Pendiente' },
-  { valor: 'asignada', nombre: 'Asignada' },
-  { valor: 'resuelta', nombre: 'Resuelta' },
-]
-
-export const profesionales = ['Ana Martínez', 'Pedro Ruiz', 'José Díaz']
+// Para el filtro de estado: [{ valor: 'recibida', nombre: 'Recibida' }, ...]
+export const estados = Object.keys(nombreEstado).map((valor) => ({ valor, nombre: nombreEstado[valor] }))
 
 // Para ordenar por urgencia: un número por cada nivel
 export const pesoUrgencia = { alta: 3, media: 2, baja: 1 }
 
-// De 'economico' a 'Económico', para mostrarlo en pantalla
+// De 'economico' a 'Económico'. Si todavia no se clasifica, lo dice.
 export const nombreTipo = (valor) => {
+  if (!valor) return 'Sin clasificar'
   const tipo = tipos.find((t) => t.valor === valor)
   return tipo ? tipo.nombre : valor
 }
+
+// Convierte una solicitud del backend en una fila de la tabla
+export const aFila = (s) => ({
+  id: s._id,
+  folio: s.folio,
+  estudiante: s.estudiante ? s.estudiante.nombre : '—',
+  motivo: s.motivo,
+  origen: s.origen,
+  tipo: s.tipo || '',
+  estado: s.estado,
+  urgencia: s.urgenciaPercibida,
+  profesional: s.profesionalAsignado ? s.profesionalAsignado.nombre : '',
+})

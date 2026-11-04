@@ -10,10 +10,13 @@ import GrupoOpciones from '../components/GrupoOpciones'
 import Campo from '../components/Campo'
 import AreaTexto from '../components/solicitud/AreaTexto'
 import QuePasaDespues from '../components/solicitud/QuePasaDespues'
+import RequiereSesion from '../components/RequiereSesion'
+import { crearSolicitudRequest } from '../api/solicitudes'
+import { mensajeDeError } from '../api/axios'
 import { tiposApoyo } from '../data/inicio'
 import { modalidades, urgenciasEstudiante } from '../data/solicitudes'
 import { imagenes } from '../data/imagenes'
-import { agregarSolicitud, borrar, crearFolio, guardar, leer } from '../utils/almacenamiento'
+import { borrar, guardar, leer } from '../utils/almacenamiento'
 import { sinErrores, telefonoValido } from '../utils/validaciones'
 
 const MAX_DESCRIPCION = 500
@@ -52,7 +55,7 @@ function SolicitudEstudiante({ sesion }) {
     setAviso('Borrador guardado en este navegador. Puedes volver después y seguir.')
   }
 
-  const manejarEnvio = (e) => {
+  const manejarEnvio = async (e) => {
     e.preventDefault()
 
     const nuevosErrores = {
@@ -70,21 +73,29 @@ function SolicitudEstudiante({ sesion }) {
       return
     }
 
-    agregarSolicitud({
-      folio: crearFolio('SM'),
-      fecha: new Date().toLocaleDateString('es-CL'),
-      tipo: 'Solicitud de estudiante',
-      motivo: datos.motivo,
-      estudiante: sesion ? sesion.nombre : 'Estudiante (sin sesión)',
-      prioridad: datos.urgencia,
-      estado: 'En revisión',
-    })
-    borrar('borradorSolicitud')
-    navegar('/confirmacion')
+    // El motivo viaja con su nombre ("Académico"); el tipo oficial
+    // lo pone despues el orientador al clasificar (RF4).
+    const motivo = tiposApoyo.find((t) => t.id === datos.motivo)
+
+    try {
+      // POST /api/solicitudes. El folio lo genera el backend.
+      const respuesta = await crearSolicitudRequest({
+        motivo: motivo ? motivo.titulo : datos.motivo,
+        descripcion: datos.descripcion.trim(),
+        urgenciaPercibida: datos.urgencia,
+        contacto: `Teléfono ${datos.telefono.trim()} · modalidad ${datos.modalidad}`,
+      })
+      // La confirmacion muestra la solicitud que respondio el backend
+      guardar('ultimaSolicitud', respuesta.data.solicitud)
+      borrar('borradorSolicitud')
+      navegar('/confirmacion')
+    } catch (error) {
+      setAviso(mensajeDeError(error))
+    }
   }
 
   return (
-    <>
+    <RequiereSesion sesion={sesion} perfiles={['estudiante']}>
       <EncabezadoPagina
         imagen={imagenes.solicitud}
         etiqueta="100% confidencial · RF2"
@@ -176,7 +187,7 @@ function SolicitudEstudiante({ sesion }) {
 
         <QuePasaDespues />
       </div>
-    </>
+    </RequiereSesion>
   )
 }
 

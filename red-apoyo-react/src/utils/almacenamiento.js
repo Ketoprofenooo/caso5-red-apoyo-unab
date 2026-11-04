@@ -1,5 +1,7 @@
 // localStorage puede fallar (modo incógnito, permisos del navegador),
 // por eso toda lectura y escritura pasa por estas funciones con try/catch.
+// Ahora solo guarda la sesion (con el token del backend), el borrador de la
+// solicitud y la ultima solicitud enviada. Los datos reales estan en MongoDB.
 
 export function leer(clave, valorPorDefecto) {
   try {
@@ -41,19 +43,4 @@ export function leerSesion() {
     return null
   }
   return sesion
-}
-
-// ---------- Solicitudes ingresadas (las comparten Alfaro y Briones) ----------
-export const leerSolicitudes = () => leer('listaSolicitudes', [])
-
-export function agregarSolicitud(solicitud) {
-  const lista = leerSolicitudes()
-  guardar('listaSolicitudes', [...lista, solicitud])
-  guardar('ultimaSolicitud', solicitud)
-}
-
-// Folio al azar, igual que en la Entrega 1: FOLIO-2026-123456-SM
-export function crearFolio(sufijo) {
-  const numero = Math.floor(Math.random() * 900000) + 100000
-  return `FOLIO-2026-${numero}-${sufijo}`
 }

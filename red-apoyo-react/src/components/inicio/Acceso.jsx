@@ -4,7 +4,7 @@ import Pestanas from '../Pestanas'
 import FormIngreso from './FormIngreso'
 import FormRegistro from './FormRegistro'
 import Resultado from './Resultado'
-import { perfiles } from '../../data/usuarios'
+import { nombrePerfil, perfiles } from '../../data/usuarios'
 import { MINUTOS_SESION } from '../../utils/almacenamiento'
 
 const opciones = [
@@ -33,10 +33,10 @@ function Acceso({ sesion, alIniciarSesion, alCerrarSesion }) {
         filas={[
           { etiqueta: 'Nombre', valor: sesion.nombre },
           { etiqueta: 'Correo', valor: sesion.correo },
-          { etiqueta: 'Perfil', valor: sesion.perfil },
+          { etiqueta: 'Perfil', valor: nombrePerfil(sesion.perfil) },
           { etiqueta: 'Entraste a las', valor: new Date(sesion.inicio).toLocaleTimeString('es-CL') },
         ]}
-        pie={`La sesión se cierra sola a los ${MINUTOS_SESION} minutos sin actividad.`}
+        pie={`La sesión se cierra sola a los ${MINUTOS_SESION} minutos de haber entrado.`}
       >
         {destino && <Link to={destino.ruta} className="boton">Ir a mi panel</Link>}
         <button type="button" onClick={alCerrarSesion} className="boton-claro">Cerrar sesión</button>
@@ -53,11 +53,11 @@ function Acceso({ sesion, alIniciarSesion, alCerrarSesion }) {
           titulo="Cuenta creada"
           filas={[
             { etiqueta: 'Nombre', valor: registro.nombre },
-            { etiqueta: 'Correo', valor: registro.correo },
-            { etiqueta: 'Perfil solicitado', valor: registro.perfil },
+            { etiqueta: 'Correo', valor: registro.email },
+            { etiqueta: 'Perfil solicitado', valor: nombrePerfil(registro.perfil) },
             { etiqueta: 'Carrera o unidad', valor: registro.unidad },
           ]}
-          pie="Bienestar tiene que validar tu perfil antes del primer ingreso. Te avisamos por correo."
+          pie={registro.mensaje}
         >
           <button type="button" onClick={() => cambiarVista('ingreso')} className="boton-claro">
             Volver a Entrar

@@ -20,10 +20,13 @@ function App() {
   // useState(leerSesion) la recupera de localStorage al abrir la página.
   const [sesion, setSesion] = useState(leerSesion)
 
-  const iniciarSesion = (usuario) => {
+  // Recibe lo que responde POST /api/auth/login: { token, usuario }
+  const iniciarSesion = ({ token, usuario }) => {
     const nueva = {
+      token,
+      id: usuario.id,
       nombre: usuario.nombre,
-      correo: usuario.correo,
+      correo: usuario.email,
       perfil: usuario.perfil,
       inicio: Date.now(),
     }
@@ -52,10 +55,11 @@ function App() {
             <Route path="/solicitud" element={<SolicitudEstudiante sesion={sesion} />} />
             <Route path="/derivacion" element={<DerivacionDocente sesion={sesion} />} />
             <Route path="/confirmacion" element={<Confirmacion />} />
-            <Route path="/mis-solicitudes" element={<MisSolicitudes />} />
-            <Route path="/bandeja" element={<Bandeja />} />
-            <Route path="/ficha" element={<FichaCaso />} />
-            <Route path="/talleres" element={<Talleres />} />
+            <Route path="/mis-solicitudes" element={<MisSolicitudes sesion={sesion} />} />
+            <Route path="/bandeja" element={<Bandeja sesion={sesion} />} />
+            <Route path="/ficha" element={<FichaCaso sesion={sesion} />} />
+            <Route path="/ficha/:id" element={<FichaCaso sesion={sesion} />} />
+            <Route path="/talleres" element={<Talleres sesion={sesion} />} />
             <Route path="*" element={<NoEncontrada />} />
           </Routes>
         </main>

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import EncabezadoPagina from '../components/EncabezadoPagina'
 import { imagenes } from '../data/imagenes'
 import { nombreUrgencia } from '../data/solicitudes'
+import { fechaCorta, nombreEstado } from '../data/tonos'
 import { leer } from '../utils/almacenamiento'
 
 const pasos = [
@@ -33,11 +34,12 @@ function Confirmacion() {
     )
   }
 
+  // `solicitud` es lo que respondio el backend al crearla
   const datos = [
-    { etiqueta: 'Fecha de ingreso', valor: solicitud.fecha },
-    { etiqueta: 'Tipo', valor: solicitud.tipo },
-    { etiqueta: 'Prioridad inicial', valor: nombreUrgencia[solicitud.prioridad] },
-    { etiqueta: 'Estado', valor: solicitud.estado },
+    { etiqueta: 'Fecha de ingreso', valor: fechaCorta(solicitud.createdAt) },
+    { etiqueta: 'Tipo', valor: solicitud.origen === 'derivacion' ? 'Derivación docente' : 'Solicitud de estudiante' },
+    { etiqueta: 'Prioridad inicial', valor: nombreUrgencia[solicitud.urgenciaPercibida] },
+    { etiqueta: 'Estado', valor: nombreEstado[solicitud.estado] },
   ]
 
   return (

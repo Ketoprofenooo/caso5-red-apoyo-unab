@@ -8,8 +8,8 @@ function FiltrosBandeja({ filtros, alCambiar, alLimpiar }) {
       <input
         name="busqueda"
         type="search"
-        placeholder="Buscar por nombre o ID"
-        aria-label="Buscar por nombre o ID"
+        placeholder="Buscar por nombre o folio"
+        aria-label="Buscar por nombre o folio"
         value={filtros.busqueda}
         onChange={alCambiar}
         className="entrada"

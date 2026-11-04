@@ -66,7 +66,7 @@ function Header({ sesion, alCerrarSesion }) {
               {sesion ? (
                 <div className="flex items-center gap-3 px-3 lg:px-0">
                   <span className="text-sm text-white/80">
-                    Hola, <strong className="text-white">{sesion.nombre.split(' ')[0]}</strong>
+                    Hola, <strong className="text-white">{sesion.nombre}</strong>
                   </span>
                   <button
                     type="button"

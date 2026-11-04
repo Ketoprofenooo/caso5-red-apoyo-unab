@@ -1,28 +1,32 @@
 import Tarjeta from '../Tarjeta'
+import { fechaHora } from '../../data/tonos'
 
 // Un taller: reutiliza la Tarjeta del home y le agrega los cupos y el botón.
-// cupos e inscrito vienen de la página; alAlternar avisa el clic.
-function TallerTarjeta({ taller, cupos, inscrito, alAlternar }) {
+// `taller` viene del backend; inscrito y puedeInscribirse los calcula la página.
+function TallerTarjeta({ taller, imagen, inscrito, puedeInscribirse, alAlternar }) {
+  const cupos = taller.cuposDisponibles
   const sinCupos = cupos === 0 && !inscrito
 
   return (
     <Tarjeta
-      imagen={taller.imagen}
+      imagen={imagen}
       titulo={taller.titulo}
-      texto={taller.texto}
-      pie={`${taller.fecha} · ${taller.lugar}`}
+      texto={taller.descripcion}
+      pie={`${fechaHora(taller.fecha)} · ${taller.lugar}`}
     >
       <p className={`mb-3 text-sm font-semibold ${cupos <= 2 ? 'text-ambar' : 'text-verde'}`}>
-        {cupos === 0 ? 'Sin cupos' : `Quedan ${cupos} cupos`}
+        {cupos === 0 ? 'Sin cupos' : `Quedan ${cupos} de ${taller.cupos} cupos`}
       </p>
-      <button
-        type="button"
-        disabled={sinCupos}
-        onClick={alAlternar}
-        className={`${inscrito ? 'boton-claro' : 'boton'} w-full`}
-      >
-        {inscrito ? 'Anular inscripción' : sinCupos ? 'Sin cupos' : 'Inscribirme'}
-      </button>
+      {puedeInscribirse && (
+        <button
+          type="button"
+          disabled={sinCupos}
+          onClick={alAlternar}
+          className={`${inscrito ? 'boton-claro' : 'boton'} w-full`}
+        >
+          {inscrito ? 'Anular inscripción' : sinCupos ? 'Sin cupos' : 'Inscribirme'}
+        </button>
+      )}
     </Tarjeta>
   )
 }

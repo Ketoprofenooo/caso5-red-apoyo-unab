@@ -10,29 +10,29 @@ import GrupoOpciones from '../components/GrupoOpciones'
 import OpcionTarjeta from '../components/OpcionTarjeta'
 import Campo from '../components/Campo'
 import AreaTexto from '../components/solicitud/AreaTexto'
+import RequiereSesion from '../components/RequiereSesion'
+import { derivarRequest } from '../api/solicitudes'
+import { mensajeDeError } from '../api/axios'
 import { dialogoPrevio, senalesAlerta, urgenciasDocente } from '../data/solicitudes'
 import { imagenes } from '../data/imagenes'
-import { agregarSolicitud, crearFolio } from '../utils/almacenamiento'
-import { sinErrores } from '../utils/validaciones'
+import { guardar } from '../utils/almacenamiento'
+import { correoValido, sinErrores } from '../utils/validaciones'
 
 const MAX_DESCRIPCION = 800
 
 function DerivacionDocente({ sesion }) {
   const navegar = useNavigate()
-  const esDocente = sesion && sesion.perfil === 'Docente derivador'
 
   const [datos, setDatos] = useState({
-    estudiante: '',
-    contactoEstudiante: '',
+    correoEstudiante: '',
     curso: '',
     senales: [],
     descripcion: '',
     urgencia: '',
     dialogo: '',
-    docente: esDocente ? sesion.nombre : '',
-    departamento: '',
   })
   const [errores, setErrores] = useState({})
+  const [errorServidor, setErrorServidor] = useState('')
 
   const manejarCambio = (e) => {
     setDatos({ ...datos, [e.target.name]: e.target.value })
@@ -47,38 +47,47 @@ function DerivacionDocente({ sesion }) {
     setDatos({ ...datos, senales })
   }
 
-  const manejarEnvio = (e) => {
+  const manejarEnvio = async (e) => {
     e.preventDefault()
+    setErrorServidor('')
 
     const nuevosErrores = {
-      estudiante: datos.estudiante.trim() === '' ? 'Falta el nombre del estudiante.' : '',
-      contactoEstudiante: datos.contactoEstudiante.trim() === '' ? 'Falta su correo o matrícula.' : '',
+      correoEstudiante: !correoValido(datos.correoEstudiante.trim()) ? 'Escribe el correo institucional del estudiante.' : '',
       curso: datos.curso.trim() === '' ? 'Indica la carrera o asignatura.' : '',
       senales: datos.senales.length === 0 ? 'Marca al menos una señal observada.' : '',
       descripcion: datos.descripcion.trim().length < 10 ? 'Describe lo observado (al menos 10 caracteres).' : '',
       urgencia: datos.urgencia === '' ? 'Elige la prioridad estimada.' : '',
       dialogo: datos.dialogo === '' ? 'Indica si conversaste con el estudiante.' : '',
-      docente: datos.docente.trim() === '' ? 'Falta tu nombre.' : '',
-      departamento: datos.departamento.trim() === '' ? 'Falta tu departamento.' : '',
     }
     setErrores(nuevosErrores)
 
     if (!sinErrores(nuevosErrores)) return
 
-    agregarSolicitud({
-      folio: crearFolio('DD'),
-      fecha: new Date().toLocaleDateString('es-CL'),
-      tipo: 'Derivación docente',
-      motivo: 'otro',
-      estudiante: datos.estudiante.trim(),
-      prioridad: datos.urgencia,
-      estado: 'En revisión',
-    })
-    navegar('/confirmacion')
+    // Se arma el texto que guarda el backend con lo que marco el docente
+    const senalesTexto = senalesAlerta
+      .filter((s) => datos.senales.includes(s.valor))
+      .map((s) => s.titulo)
+      .join(', ')
+    const dialogo = dialogoPrevio.find((d) => d.valor === datos.dialogo)
+
+    try {
+      // POST /api/solicitudes/derivacion. El backend busca al estudiante por su correo.
+      const respuesta = await derivarRequest({
+        emailEstudiante: datos.correoEstudiante.trim().toLowerCase(),
+        motivo: senalesTexto,
+        descripcion: `${datos.descripcion.trim()} (Asignatura: ${datos.curso.trim()}. ¿Conversó antes con el estudiante?: ${dialogo.titulo})`,
+        urgenciaPercibida: datos.urgencia,
+        contacto: 'Correo institucional',
+      })
+      guardar('ultimaSolicitud', respuesta.data.solicitud)
+      navegar('/confirmacion')
+    } catch (error) {
+      setErrorServidor(mensajeDeError(error))
+    }
   }
 
   return (
-    <>
+    <RequiereSesion sesion={sesion} perfiles={['docente']}>
       <EncabezadoPagina
         imagen={imagenes.docente}
         etiqueta="Red docente de cuidado · RF3"
@@ -90,16 +99,18 @@ function DerivacionDocente({ sesion }) {
         <form onSubmit={manejarEnvio} noValidate className="mx-auto max-w-4xl border border-borde bg-fondo px-5 md:px-8">
           <PasoFormulario numero="1" titulo="Datos del estudiante" requerido>
             <div className="grid gap-x-4 md:grid-cols-2">
-              <Campo id="estudiante" etiqueta="Nombre completo" error={errores.estudiante}>
-                <input id="estudiante" name="estudiante" placeholder="Ej: Sofía Valenzuela Ruiz" value={datos.estudiante} onChange={manejarCambio} className="entrada" />
+              <Campo
+                id="correoEstudiante"
+                etiqueta="Correo institucional del estudiante"
+                pista="Tiene que tener cuenta en la plataforma. Prueba: estudiante2@universidad.cl"
+                error={errores.correoEstudiante}
+              >
+                <input id="correoEstudiante" name="correoEstudiante" type="email" placeholder="nombre@universidad.cl" value={datos.correoEstudiante} onChange={manejarCambio} className="entrada" />
               </Campo>
-              <Campo id="contactoEstudiante" etiqueta="Correo institucional o matrícula" error={errores.contactoEstudiante}>
-                <input id="contactoEstudiante" name="contactoEstudiante" placeholder="sofia.valenzuela@universidad.cl" value={datos.contactoEstudiante} onChange={manejarCambio} className="entrada" />
+              <Campo id="curso" etiqueta="Carrera o asignatura" error={errores.curso}>
+                <input id="curso" name="curso" placeholder="Ej: Cálculo Multivariable (sección 3)" value={datos.curso} onChange={manejarCambio} className="entrada" />
               </Campo>
             </div>
-            <Campo id="curso" etiqueta="Carrera o asignatura" error={errores.curso}>
-              <input id="curso" name="curso" placeholder="Ej: Ing. Civil, Cálculo Multivariable (sección 3)" value={datos.curso} onChange={manejarCambio} className="entrada" />
-            </Campo>
           </PasoFormulario>
 
           <PasoFormulario numero="2" titulo="Señales observadas" ayuda="Marca todas las que correspondan.">
@@ -152,16 +163,9 @@ function DerivacionDocente({ sesion }) {
             />
           </PasoFormulario>
 
-          <PasoFormulario numero="5" titulo="Tus datos como docente">
-            <div className="grid gap-x-4 md:grid-cols-2">
-              <Campo id="docente" etiqueta="Nombre" error={errores.docente}>
-                <input id="docente" name="docente" value={datos.docente} onChange={manejarCambio} className="entrada" />
-              </Campo>
-              <Campo id="departamento" etiqueta="Departamento" error={errores.departamento}>
-                <input id="departamento" name="departamento" placeholder="Ej: Facultad de Ingeniería" value={datos.departamento} onChange={manejarCambio} className="entrada" />
-              </Campo>
-            </div>
-          </PasoFormulario>
+          {errorServidor && (
+            <p className="mt-6 border border-rojo bg-rojo-fondo px-3 py-2 text-sm text-rojo">{errorServidor}</p>
+          )}
 
           <div className="flex flex-col-reverse gap-3 py-6 sm:flex-row sm:justify-end">
             <button type="button" onClick={() => navegar('/')} className="boton-claro">Cancelar</button>
@@ -169,7 +173,7 @@ function DerivacionDocente({ sesion }) {
           </div>
         </form>
       </div>
-    </>
+    </RequiereSesion>
   )
 }
 

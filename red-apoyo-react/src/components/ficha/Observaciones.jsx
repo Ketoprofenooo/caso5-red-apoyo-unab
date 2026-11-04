@@ -1,33 +1,31 @@
-import { useState } from 'react'
-import Campo from '../Campo'
+import { fechaHora } from '../../data/tonos'
 
-// Observaciones internas: solo las ve el profesional de apoyo.
-// Con el selector se prueba cómo se ve para cada perfil.
-function Observaciones({ texto }) {
-  const [perfil, setPerfil] = useState('profesional')
+// Observaciones internas del equipo (RNF1).
+// El backend ya no se las manda al estudiante; aca ademas se le explica.
+function Observaciones({ observaciones, esEstudiante }) {
+  if (esEstudiante) {
+    return (
+      <p className="border-l-4 border-rojo bg-rojo-fondo p-5 text-sm text-rojo">
+        Las observaciones internas son solo para el equipo que te acompaña.
+      </p>
+    )
+  }
+
+  if (observaciones.length === 0) {
+    return <p className="text-sm text-texto-suave">Todavía no hay observaciones internas.</p>
+  }
 
   return (
-    <>
-      <div className="max-w-xs">
-        <Campo id="perfil" etiqueta="Ver como">
-          <select id="perfil" value={perfil} onChange={(e) => setPerfil(e.target.value)} className="entrada">
-            <option value="profesional">Profesional de apoyo</option>
-            <option value="estudiante">Estudiante</option>
-          </select>
-        </Campo>
-      </div>
-
-      {perfil === 'profesional' ? (
-        <div className="border-l-4 border-verde bg-menta p-5">
-          <h3 className="text-lg">Observaciones internas</h3>
-          <p className="mt-2 text-sm">{texto}</p>
-        </div>
-      ) : (
-        <p className="border-l-4 border-rojo bg-rojo-fondo p-5 text-sm text-rojo">
-          Las observaciones de seguimiento están restringidas para este perfil.
-        </p>
-      )}
-    </>
+    <ul className="space-y-3">
+      {observaciones.map((o) => (
+        <li key={o._id} className="border-l-4 border-verde bg-menta p-4">
+          <p className="text-xs text-texto-suave">
+            {fechaHora(o.fecha)}{o.autor && ` · ${o.autor.nombre}`}
+          </p>
+          <p className="mt-1 text-sm">{o.detalle}</p>
+        </li>
+      ))}
+    </ul>
   )
 }
 
