@@ -137,6 +137,13 @@ export const verSolicitud = async (req, res, next) => {
       return res.status(403).json({ mensaje: "No tienes acceso a esta solicitud" })
     }
 
+    // RNF1: las observaciones internas son del equipo, el estudiante no las ve
+    if (req.usuario.perfil === "estudiante") {
+      solicitud.seguimientos = solicitud.seguimientos.filter(
+        s => s.tipoRegistro !== "observacion"
+      )
+    }
+
     res.status(200).json(solicitud)
   } catch (error) {
     next(error)
