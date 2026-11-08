@@ -53,7 +53,6 @@ const cargar = async () => {
   const docente      = usuarios.find(u => u.perfil === "docente")
   const orientador   = usuarios.find(u => u.perfil === "orientador")
   const profesional  = usuarios.find(u => u.perfil === "profesional")
-  const admin        = usuarios.find(u => u.perfil === "admin")
 
   console.log("Creando mantenedores...")
   await Maestro.create(maestros)
