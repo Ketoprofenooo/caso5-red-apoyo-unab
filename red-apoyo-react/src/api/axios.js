@@ -3,8 +3,10 @@ import { borrar, leer } from '../utils/almacenamiento'
 
 // Igual que en la clase (const API = 'http://localhost:4000/api'), pero en una
 // instancia de axios para no repetir la direccion en cada llamada.
+// En Vercel la direccion sale de VITE_API_URL (archivo .env.production);
+// en tu computador no existe esa variable y se usa localhost.
 const api = axios.create({
-  baseURL: 'http://localhost:4000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api',
 })
 
 // Antes de cada peticion: si hay sesion, se agrega el token.

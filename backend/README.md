@@ -114,6 +114,22 @@ históricos quedarían incompletos.
 tienen la misma forma: nombre, descripción y activo. Tres colecciones idénticas
 habría sido repetir código.
 
+## Publicado en internet
+
+| Pieza | Dónde |
+|---|---|
+| Frontend (React) | Vercel: <https://caso5-red-apoyo-unab.vercel.app> |
+| Backend (Express) | Render: <https://red-apoyo-unab-api.onrender.com/api/salud> |
+| Base de datos | MongoDB Atlas |
+
+- Render se configura con `render.yaml` en la raíz del repositorio (carpeta
+  `backend`, `npm install`, `npm start`).
+- En Render se definen `MONGO_URI` (la cadena de Atlas) y `ORIGEN_FRONTEND`.
+  `JWT_SECRET` lo genera Render.
+- El frontend sabe dónde está la API por `red-apoyo-react/.env.production`.
+- El plan gratis de Render se duerme tras 15 minutos sin uso: la primera
+  petición puede tardar cerca de un minuto en despertar el servidor.
+
 ## Pendiente
 
 - Falta decidir si la contraseña se recupera por correo. Hoy solo la cambia el admin.

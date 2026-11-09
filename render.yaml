@@ -1,0 +1,23 @@
+# Configuracion de Render (Blueprint) para el backend de la Red de Apoyo.
+# Render lee este archivo al crear el servicio desde el repositorio.
+services:
+  - type: web
+    name: red-apoyo-unab-api
+    runtime: node
+    plan: free
+    rootDir: backend            # el backend vive en esta carpeta del repo
+    buildCommand: npm install
+    startCommand: npm start     # node src/index.js
+    healthCheckPath: /api/salud
+    envVars:
+      # Cadena de conexion de MongoDB Atlas. Se pega a mano en Render (es secreta).
+      - key: MONGO_URI
+        sync: false
+      # Clave para firmar los JWT. Render genera una al azar.
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRA
+        value: 20m
+      # Paginas que pueden llamar a la API: Vercel y el computador local
+      - key: ORIGEN_FRONTEND
+        value: https://caso5-red-apoyo-unab.vercel.app,http://localhost:5173
