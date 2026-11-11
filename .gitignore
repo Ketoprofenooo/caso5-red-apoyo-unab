@@ -6,3 +6,6 @@ desktop.ini
 # Editores
 .vscode/
 .idea/
+
+# Variables de entorno (contraseñas, cadenas de conexión)
+.env

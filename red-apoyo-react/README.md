@@ -151,6 +151,5 @@ sistema pide menos movimiento (`prefers-reduced-motion`).
 
 ## La versión anterior
 
-Las maquetas de la Entrega 1 siguen intactas en las carpetas de cada
-integrante (`1-Fajardo-Zamora/`, `2-Alfaro-Sanchez/`, etc.) y en el
-`index.html` de la raíz, para poder comparar.
+Las maquetas de la Entrega 1 están guardadas en `../backups/entrega1-html/`,
+una carpeta por integrante, para poder comparar.
