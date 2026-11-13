@@ -1,5 +1,5 @@
 // Carga inicial de la base de datos.
-// Se ejecuta con: npm run seed
+// OE JOSE RECUERDA QUE SE EJECUTA ASI NO RUN SEEED COMO EN EL MAICRA: npm run seed
 // OJO: borra todo lo que haya y vuelve a crear los datos de prueba.
 
 import mongoose from "mongoose"

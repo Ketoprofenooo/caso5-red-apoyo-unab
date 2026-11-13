@@ -1,0 +1,383 @@
+<title>Guion Postman Red de Apoyo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una columna de lectura; cada integrante es un bloque con su guion y su peticion */
+:root{
+  --bg:#f6f8f7; --surface:#ffffff; --surface-2:#eaf0ee; --fg:#17211f; --muted:#56635f;
+  --line:#d5dfdb; --accent:#1d4a42; --accent-soft:#dcebe6; --get:#1f6f43; --post:#8a5a00; --put:#1d4f91; --del:#a33a2c;
+  --display:"Fraunces",Georgia,serif; --body:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111816; --surface:#18211f; --surface-2:#1f2a27; --fg:#e4ece9; --muted:#9aaba6;
+  --line:#2c3a36; --accent:#8fcfbf; --accent-soft:#1f3631; --get:#6fd39b; --post:#e8b04a; --put:#86b4f0; --del:#f08a7b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111816; --surface:#18211f; --surface-2:#1f2a27; --fg:#e4ece9; --muted:#9aaba6;
+  --line:#2c3a36; --accent:#8fcfbf; --accent-soft:#1f3631; --get:#6fd39b; --post:#e8b04a; --put:#86b4f0; --del:#f08a7b; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+.wrap{max-width:820px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:2.1rem}
+h2{font-size:1.5rem}
+h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:22px 0 8px;font-weight:600}
+p{margin:0 0 10px}
+.lead{color:var(--muted);max-width:62ch;margin-top:10px}
+section{margin-top:44px}
+.orden{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding:0;list-style:none}
+.orden li{background:var(--surface);border:1px solid var(--line);padding:6px 12px;font-size:.9rem}
+.orden li b{color:var(--accent)}
+ol.pasos{padding-left:22px;margin:0}
+ol.pasos li{margin-bottom:8px}
+.persona{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);padding:24px 22px;margin-top:28px}
+.cab{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 14px}
+.rf{font-size:.85rem;color:var(--muted)}
+.dice{background:var(--accent-soft);padding:12px 16px;font-style:italic;max-width:none}
+.pet{border:1px solid var(--line);margin-top:10px;min-width:0}
+.pet-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:10px 14px;background:var(--surface-2);font-family:var(--mono);font-size:.88rem}
+.m{font-weight:600}
+.m.GET{color:var(--get)}.m.POST{color:var(--post)}.m.PUT{color:var(--put)}.m.DELETE{color:var(--del)}
+.url{word-break:break-all}
+.pet-body{padding:10px 14px;font-size:.92rem}
+.pet-body dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0 0 8px}
+.pet-body dt{color:var(--muted)}
+.pet-body dd{margin:0;min-width:0}
+.codebox{position:relative;margin:6px 0 4px}
+pre{font-family:var(--mono);font-size:.85rem;line-height:1.5;background:var(--bg);border:1px solid var(--line);padding:12px 14px;margin:0;overflow-x:auto}
+.copiar{position:absolute;top:6px;right:6px;font:500 .78rem var(--body);background:var(--surface);color:var(--fg);border:1px solid var(--line);padding:3px 10px;cursor:pointer}
+.copiar:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.resp{font-family:var(--mono);font-size:.85rem}
+.ok{color:var(--get);font-weight:600}.err{color:var(--del);font-weight:600}
+code{font-family:var(--mono);font-size:.88em;background:var(--surface-2);padding:1px 5px}
+.preg p{margin-bottom:8px}
+.preg b{display:block}
+.nota{border-left:3px solid var(--post);padding:4px 0 4px 14px;color:var(--fg);margin-top:16px}
+.tabla{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Guion de Postman para el viernes</h1>
+    <p class="lead">Caso 5 · Red de Apoyo y Salud Mental Universitaria. Cada integrante escribe <b>una petición desde cero</b> en Postman, explica qué hace y muestra un caso de error. El mismo caso pasa de mano en mano: Alfaro crea la solicitud, Briones la clasifica y asigna, Méndez la atiende y la cierra.</p>
+    <ul class="orden">
+      <li><b>1</b> Fajardo · registro y login</li>
+      <li><b>2</b> Alfaro · crear solicitud</li>
+      <li><b>3</b> Briones · clasificar y asignar</li>
+      <li><b>4</b> Méndez · seguimiento y cierre</li>
+      <li><b>5</b> Mena · talleres y reportes</li>
+    </ul>
+  </header>
+
+  <section>
+    <h2>Antes de empezar</h2>
+    <ol class="pasos">
+      <li>En la carpeta <code>backend</code>: <code>npm run seed</code> y después <code>npm run dev</code>. Debe decir <i>Base de Datos Conectada</i> y <i>Servidor en el puerto 4000</i>.</li>
+      <li>Abrir <code>http://localhost:4000/api/salud</code> en el navegador. Tiene que responder <code>{"ok":true}</code>.</li>
+      <li>Abrir Postman con la colección <b>Red de Apoyo · API (Entrega 2)</b> importada. Sirve de respaldo y para mostrar los casos de error.</li>
+      <li>Tener abierto un bloc de notas para pegar el <b>id de la solicitud</b> que crea Alfaro. Lo usan Briones y Méndez.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Cómo escribir una petición desde cero</h2>
+    <p class="lead">Esto es lo que el profe quiere ver. Son los mismos pasos para todos.</p>
+    <ol class="pasos">
+      <li>Apretar el <b>+</b> de las pestañas de arriba. Se abre una petición vacía.</li>
+      <li>A la izquierda, elegir el <b>método</b> (GET, POST, PUT, DELETE).</li>
+      <li>Escribir la <b>URL</b>, por ejemplo <code>http://localhost:4000/api/auth/login</code>.</li>
+      <li>Si la ruta pide sesión: pestaña <b>Authorization</b> → Auth Type <b>Bearer Token</b> → pegar el token que devolvió el login, sin comillas.</li>
+      <li>Si se mandan datos: pestaña <b>Body</b> → <b>raw</b> → a la derecha elegir <b>JSON</b> → pegar el JSON.</li>
+      <li><b>Send</b>. Abajo se ven el código (200, 201, 400…) y el JSON que respondió el backend.</li>
+    </ol>
+    <p class="nota">El token sale en la respuesta del login, en el campo <code>"token"</code>. Se copia todo el texto largo que empieza con <code>eyJ</code>, sin las comillas. Dura 20 minutos.</p>
+  </section>
+
+  <!-- FAJARDO -->
+  <article class="persona">
+    <div class="cab"><h2>1 · Fajardo</h2><span class="rf">RF1 · Autenticación y estructura del backend</span></div>
+    <h3>Qué dice</h3>
+    <p class="dice">"El backend está hecho en Node con Express y guarda en MongoDB con Mongoose. Cada petición pasa por middlewares: primero se revisa el token, después el perfil, y recién ahí llega al controlador. Voy a registrar un usuario y hacer login para obtener el token que usan todas las demás peticiones."</p>
+
+    <h3>Petición en vivo 1 · Registrar un usuario</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/auth/registro</span></div>
+      <div class="pet-body">
+        <dl><dt>Authorization</dt><dd>No lleva (es pública)</dd></dl>
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "nombre": "Ana Perez",
+  "email": "ana.perez@universidad.cl",
+  "password": "clave1234",
+  "perfil": "estudiante",
+  "unidad": "Ingenieria Civil"
+}</pre></div>
+        <p class="resp"><span class="ok">201</span> "Cuenta creada correctamente"</p>
+      </div>
+    </div>
+
+    <h3>Petición en vivo 2 · Login</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/auth/login</span></div>
+      <div class="pet-body">
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "email": "ana.perez@universidad.cl",
+  "password": "clave1234"
+}</pre></div>
+        <p class="resp"><span class="ok">200</span> "Sesion iniciada" + <code>token</code> + datos del usuario (sin la contraseña)</p>
+      </div>
+    </div>
+
+    <h3>Casos de error para mostrar (desde la colección, carpeta 1)</h3>
+    <p><b>Login con clave incorrecta</b> → <span class="err">401</span> · <b>Perfil sin token</b> → <span class="err">401</span> · <b>Registro con datos inválidos</b> → <span class="err">400</span></p>
+
+    <h3>Si el profe pregunta</h3>
+    <div class="preg">
+      <p><b>¿Cómo se guarda la contraseña?</b>Cifrada con bcrypt en un <code>pre("save")</code> del modelo. En Compass se ve como <code>$2b$10$…</code>, nunca la clave real.</p>
+      <p><b>¿Y si alguien se registra como admin?</b>Queda con <code>activo: false</code> y el login responde 403 hasta que el admin lo valide. Solo los estudiantes entran de inmediato.</p>
+      <p><b>¿Qué es el token?</b>Un JWT firmado con el id y el perfil. Dura 20 minutos (RNF3) y se manda en el header <code>Authorization: Bearer</code>.</p>
+    </div>
+  </article>
+
+  <!-- ALFARO -->
+  <article class="persona">
+    <div class="cab"><h2>2 · Alfaro</h2><span class="rf">RF2, RF3 · Solicitud del estudiante y derivación docente</span></div>
+    <h3>Qué dice</h3>
+    <p class="dice">"Ahora entro como estudiante y pido apoyo. El backend valida los datos, guarda la solicitud y le genera un folio automático. También muestro cómo un docente deriva a un estudiante que ya tiene cuenta."</p>
+
+    <h3>Petición en vivo 1 · Login del estudiante</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/auth/login</span></div>
+      <div class="pet-body">
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "email": "estudiante@universidad.cl",
+  "password": "clave1234"
+}</pre></div>
+        <p class="resp"><span class="ok">200</span> → copiar el <code>token</code></p>
+      </div>
+    </div>
+
+    <h3>Petición en vivo 2 · Crear la solicitud</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/solicitudes</span></div>
+      <div class="pet-body">
+        <dl><dt>Authorization</dt><dd>Bearer Token → token del estudiante</dd></dl>
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "motivo": "Academico",
+  "descripcion": "Me cuesta concentrarme y estoy durmiendo poco antes de las pruebas.",
+  "urgenciaPercibida": "alta",
+  "contacto": "Correo institucional"
+}</pre></div>
+        <p class="resp"><span class="ok">201</span> "Solicitud creada correctamente" con folio <code>RA-2026-0003</code> (si se corrió el seed antes) y estado <code>recibida</code></p>
+        <p class="nota" style="margin-top:8px"><b>Importante:</b> copiar el <code>"_id"</code> de la solicitud de la respuesta (no el folio) y dejarlo en el bloc de notas para Briones y Méndez.</p>
+      </div>
+    </div>
+
+    <h3>Casos de error para mostrar (carpeta 2)</h3>
+    <p><b>Descripción corta</b> → <span class="err">400</span> · <b>Derivar a un correo que no existe</b> → <span class="err">404</span></p>
+
+    <h3>Si el profe pregunta</h3>
+    <div class="preg">
+      <p><b>¿Dónde se genera el folio?</b>En un <code>pre("save")</code> del modelo Solicitud. Cuenta las solicitudes del año y arma <code>RA-año-número</code>; así ningún controlador se olvida de ponerlo.</p>
+      <p><b>¿El docente crea cuentas?</b>No. Deriva a un estudiante que ya está registrado, usando su correo. Si no existe, responde 404.</p>
+    </div>
+  </article>
+
+  <!-- BRIONES -->
+  <article class="persona">
+    <div class="cab"><h2>3 · Briones</h2><span class="rf">RF4, RF5 · Bandeja del orientador</span></div>
+    <h3>Qué dice</h3>
+    <p class="dice">"La solicitud que creó Alfaro llega a la bandeja del orientador. Yo entro como orientador, la clasifico por tipo y le asigno un profesional. Solo el orientador o el admin pueden hacerlo: si lo intenta un estudiante, el backend responde 403."</p>
+
+    <h3>Petición en vivo 1 · Login del orientador</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/auth/login</span></div>
+      <div class="pet-body">
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "email": "orientador@universidad.cl",
+  "password": "clave1234"
+}</pre></div>
+      </div>
+    </div>
+
+    <h3>Petición en vivo 2 · Ver la bandeja</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m GET">GET</span><span class="url">http://localhost:4000/api/solicitudes</span></div>
+      <div class="pet-body"><dl><dt>Authorization</dt><dd>Bearer Token → token del orientador</dd></dl>
+      <p class="resp"><span class="ok">200</span> todas las solicitudes, la de Alfaro arriba</p></div>
+    </div>
+
+    <h3>Petición en vivo 3 · Clasificar</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m PUT">PUT</span><span class="url">http://localhost:4000/api/solicitudes/<b>ID_DE_LA_SOLICITUD</b>/clasificar</span></div>
+      <div class="pet-body">
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "tipo": "academico"
+}</pre></div>
+        <p class="resp"><span class="ok">200</span> estado pasa a <code>clasificada</code>. Tipos válidos: emocional, academico, social…</p>
+      </div>
+    </div>
+
+    <h3>Petición en vivo 4 · Ver profesionales y asignar</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m GET">GET</span><span class="url">http://localhost:4000/api/profesionales</span></div>
+      <div class="pet-body"><p class="resp"><span class="ok">200</span> → copiar el <code>_id</code> de <b>Ps. Jorge Herrera</b></p></div>
+    </div>
+    <div class="pet">
+      <div class="pet-top"><span class="m PUT">PUT</span><span class="url">http://localhost:4000/api/solicitudes/<b>ID_DE_LA_SOLICITUD</b>/asignar</span></div>
+      <div class="pet-body">
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "profesionalId": "PEGAR_ID_DEL_PROFESIONAL"
+}</pre></div>
+        <p class="resp"><span class="ok">200</span> estado pasa a <code>asignada</code></p>
+      </div>
+    </div>
+
+    <h3>Casos de error para mostrar (carpeta 3)</h3>
+    <p><b>Estudiante intenta clasificar</b> → <span class="err">403</span> · <b>Asignar sin clasificar</b> → <span class="err">400</span></p>
+
+    <h3>Si el profe pregunta</h3>
+    <div class="preg">
+      <p><b>¿De dónde sale el id en la URL?</b>Es <code>req.params.id</code>. Lo que va en el Body (<code>tipo</code>, <code>profesionalId</code>) llega en <code>req.body</code>.</p>
+      <p><b>¿Quién decide el 403?</b>El middleware <code>permitir("orientador", "admin")</code>, antes de llegar al controlador.</p>
+    </div>
+  </article>
+
+  <!-- MENDEZ -->
+  <article class="persona">
+    <div class="cab"><h2>4 · Méndez</h2><span class="rf">RF6, RF7, RF11 · Ficha, seguimiento y cierre</span></div>
+    <h3>Qué dice</h3>
+    <p class="dice">"El caso ya tiene profesional. Entro como el profesional asignado, registro una cita y después cierro el caso con un motivo. Los seguimientos se guardan dentro de la misma solicitud, y el estudiante recibe un aviso en cada paso."</p>
+
+    <h3>Petición en vivo 1 · Login del profesional</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/auth/login</span></div>
+      <div class="pet-body">
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "email": "profesional@universidad.cl",
+  "password": "clave1234"
+}</pre></div>
+      </div>
+    </div>
+
+    <h3>Petición en vivo 2 · Registrar una cita</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/solicitudes/<b>ID_DE_LA_SOLICITUD</b>/seguimiento</span></div>
+      <div class="pet-body">
+        <dl><dt>Authorization</dt><dd>Bearer Token → token del profesional</dd></dl>
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "tipoRegistro": "cita",
+  "detalle": "Primera sesion el martes a las 11:00"
+}</pre></div>
+        <p class="resp"><span class="ok">201</span> "Seguimiento registrado", estado pasa a <code>en_atencion</code></p>
+      </div>
+    </div>
+
+    <h3>Petición en vivo 3 · Cerrar el caso</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m PUT">PUT</span><span class="url">http://localhost:4000/api/solicitudes/<b>ID_DE_LA_SOLICITUD</b>/cerrar</span></div>
+      <div class="pet-body">
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "motivo": "Objetivo cumplido",
+  "derivacionRealizada": "No"
+}</pre></div>
+        <p class="resp"><span class="ok">200</span> "Solicitud cerrada correctamente". Si se manda otra vez: <span class="err">409</span></p>
+      </div>
+    </div>
+
+    <h3>Casos de error para mostrar (carpeta 4)</h3>
+    <p><b>Cerrar dos veces</b> → <span class="err">409</span> · <b>El estudiante ve su solicitud</b> → <span class="ok">200</span> pero sin las observaciones internas</p>
+
+    <h3>Si el profe pregunta</h3>
+    <div class="preg">
+      <p><b>¿Dónde quedan los seguimientos?</b>Dentro de la solicitud, como subdocumentos. En Compass se ven como una lista en el documento.</p>
+      <p><b>¿El estudiante ve todo?</b>No. Solo ve sus casos, y las observaciones internas del profesional se le ocultan.</p>
+    </div>
+  </article>
+
+  <!-- MENA -->
+  <article class="persona">
+    <div class="cab"><h2>5 · Mena</h2><span class="rf">RF8 a RF12 · Talleres, mantenedores, reportes y bitácora</span></div>
+    <h3>Qué dice</h3>
+    <p class="dice">"Entro como admin. Creo un taller, y al final muestro el reporte, que solo trae conteos y ningún nombre, y la bitácora, donde quedó registrado todo lo que hicieron mis compañeros."</p>
+
+    <h3>Petición en vivo 1 · Login del admin</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/auth/login</span></div>
+      <div class="pet-body">
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "email": "admin@universidad.cl",
+  "password": "clave1234"
+}</pre></div>
+      </div>
+    </div>
+
+    <h3>Petición en vivo 2 · Crear un taller</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m POST">POST</span><span class="url">http://localhost:4000/api/talleres</span></div>
+      <div class="pet-body">
+        <dl><dt>Authorization</dt><dd>Bearer Token → token del admin</dd></dl>
+        <div class="codebox"><button class="copiar" type="button">Copiar</button><pre>{
+  "titulo": "Manejo del estres en evaluaciones",
+  "descripcion": "Taller grupal con tecnicas de respiracion y organizacion.",
+  "fecha": "2026-12-01T18:00:00.000Z",
+  "lugar": "Sala 101",
+  "cupos": 20
+}</pre></div>
+        <p class="resp"><span class="ok">201</span> taller creado, con <code>cuposDisponibles</code> calculado</p>
+      </div>
+    </div>
+
+    <h3>Petición en vivo 3 · Reporte y bitácora</h3>
+    <div class="pet">
+      <div class="pet-top"><span class="m GET">GET</span><span class="url">http://localhost:4000/api/reportes/agregado</span></div>
+      <div class="pet-body"><p class="resp"><span class="ok">200</span> totales por tipo, estado y urgencia. Ningún nombre (RNF6)</p></div>
+    </div>
+    <div class="pet">
+      <div class="pet-top"><span class="m GET">GET</span><span class="url">http://localhost:4000/api/bitacora</span></div>
+      <div class="pet-body"><p class="resp"><span class="ok">200</span> quién hizo qué y cuándo, incluido lo que hicieron los compañeros recién</p></div>
+    </div>
+
+    <h3>Casos de error para mostrar (carpeta 5)</h3>
+    <p><b>Inscribirse dos veces</b> → <span class="err">409</span> · <b>Estudiante pide el reporte</b> → <span class="err">403</span> · <b>Eliminar taller</b> → <span class="ok">200</span> pero queda <code>activo: false</code> (baja lógica)</p>
+
+    <h3>Si el profe pregunta</h3>
+    <div class="preg">
+      <p><b>¿Por qué eliminar no borra?</b>Baja lógica: se marca <code>activo: false</code> para que los reportes históricos no queden incompletos.</p>
+      <p><b>¿Dónde quedan los inscritos?</b>En un arreglo <code>inscritos</code> dentro del mismo taller, con los ids de los estudiantes.</p>
+    </div>
+  </article>
+
+  <section>
+    <h2>Si algo falla en vivo</h2>
+    <div class="tabla"><table>
+      <thead><tr><th>Lo que sale</th><th>Qué pasó</th><th>Qué hacer</th></tr></thead>
+      <tbody>
+        <tr><td><code>401</code> "No hay sesion iniciada" o "La sesion expiro"</td><td>No se puso el token, o pasaron 20 minutos</td><td>Hacer login de nuevo y pegar el token en Authorization</td></tr>
+        <tr><td><code>403</code></td><td>Se usó el token de otro perfil</td><td>Revisar que sea el token del perfil correcto</td></tr>
+        <tr><td><code>400</code> "El id enviado no es valido"</td><td>El id de la URL quedó mal pegado</td><td>Volver a copiar el <code>_id</code>, sin comillas ni espacios</td></tr>
+        <tr><td><code>400</code> "Datos invalidos"</td><td>El JSON tiene un campo malo o falta uno</td><td>Leer el mensaje: dice exactamente qué falta</td></tr>
+        <tr><td>Error de JSON en Postman</td><td>Falta una coma o una comilla, o el Body no está en JSON</td><td>Body → raw → JSON, y usar el botón Copiar de esta guía</td></tr>
+        <tr><td><code>ECONNREFUSED</code></td><td>El backend no está corriendo</td><td><code>npm run dev</code> en la carpeta backend</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+</div>
+
+<script>
+document.querySelectorAll('.copiar').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var pre = b.nextElementSibling;
+    var listo = function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar'; }, 1500); };
+    try {
+      navigator.clipboard.writeText(pre.textContent).then(listo, function () { seleccionar(pre); });
+    } catch (e) { seleccionar(pre); }
+  });
+});
+function seleccionar(el) {
+  var r = document.createRange(); r.selectNodeContents(el);
+  var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+}
+</script>

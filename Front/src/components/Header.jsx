@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 // Mismo encabezado para todas las páginas: marca + navegación con Link,
 // como el Header.jsx visto en clase. Además muestra quién inició sesión
@@ -16,6 +16,7 @@ const enlaces = [
 
 function Header({ sesion, alCerrarSesion }) {
   const [menuAbierto, setMenuAbierto] = useState(false)
+  const navigate = useNavigate()
 
   const cerrarMenu = () => setMenuAbierto(false)
 
@@ -74,6 +75,8 @@ function Header({ sesion, alCerrarSesion }) {
                     onClick={() => {
                       alCerrarSesion()
                       cerrarMenu()
+                      // al salir vuelve al inicio, para no quedar en una pagina que pide sesion
+                      navigate('/')
                     }}
                   >
                     Salir
