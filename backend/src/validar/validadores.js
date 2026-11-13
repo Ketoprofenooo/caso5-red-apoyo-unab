@@ -35,6 +35,20 @@ export const validarLogin = (req, res, next) => {
   next()
 }
 
+// RF1 - Editar el perfil propio: todo es opcional, pero lo que venga tiene que estar bien
+export const validarEdicionPerfil = (req, res, next) => {
+  const { nombre, password } = req.body
+  const errores = []
+
+  if (nombre !== undefined && vacio(nombre)) errores.push("El nombre no puede quedar vacio")
+  if (password !== undefined && (String(password).length < 8 || !/\d/.test(password))) {
+    errores.push("La contrasena necesita 8 caracteres como minimo y al menos un numero")
+  }
+
+  if (errores.length) return res.status(400).json({ mensaje: "Datos invalidos", errores })
+  next()
+}
+
 export const validarSolicitud = (req, res, next) => {
   const { motivo, descripcion, contacto, urgenciaPercibida } = req.body
   const errores = []

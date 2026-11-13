@@ -54,6 +54,40 @@ export const crearSolicitud = async (req, res, next) => {
   }
 }
 
+/* ---------- RF2: el estudiante corrige su solicitud ---------- */
+// Solo mientras nadie la ha revisado (estado "recibida")
+export const editarSolicitud = async (req, res, next) => {
+  try {
+    const { motivo, descripcion, urgenciaPercibida, contacto } = req.body
+
+    const solicitud = await Solicitud.findById(req.params.id)
+    if (!solicitud) {
+      return res.status(404).json({ mensaje: "Solicitud no encontrada" })
+    }
+
+    if (String(solicitud.estudiante) !== String(req.usuario._id)) {
+      return res.status(403).json({ mensaje: "Solo puedes editar tus propias solicitudes" })
+    }
+
+    if (solicitud.estado !== "recibida") {
+      return res.status(409).json({
+        mensaje: "La solicitud ya fue revisada por el equipo, no se puede editar"
+      })
+    }
+
+    solicitud.motivo = motivo
+    solicitud.descripcion = descripcion
+    solicitud.contacto = contacto
+    if (urgenciaPercibida) solicitud.urgenciaPercibida = urgenciaPercibida
+
+    await solicitud.save()
+
+    res.status(200).json({ mensaje: "Solicitud actualizada", solicitud })
+  } catch (error) {
+    next(error)
+  }
+}
+
 /* ---------- RF3: el docente deriva a un estudiante ---------- */
 export const derivarEstudiante = async (req, res, next) => {
   try {

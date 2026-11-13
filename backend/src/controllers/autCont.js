@@ -81,6 +81,37 @@ export const login = async (req, res, next) => {
   }
 }
 
+// RF1 - Cada usuario edita sus propios datos: nombre, unidad y contrasena.
+// El correo y el perfil no se tocan aqui (el perfil lo cambia el admin).
+export const editarPerfil = async (req, res, next) => {
+  try {
+    const { nombre, unidad, password } = req.body
+
+    const usuario = await Usuario.findById(req.usuario._id).select("+password")
+
+    if (nombre !== undefined) usuario.nombre = nombre
+    if (unidad !== undefined) usuario.unidad = unidad
+    if (password !== undefined) usuario.password = password
+
+    // Se usa save() y no findByIdAndUpdate para que el pre("save")
+    // cifre la nueva contrasena con bcrypt
+    await usuario.save()
+
+    res.status(200).json({
+      mensaje: "Perfil actualizado",
+      usuario: {
+        id: usuario._id,
+        nombre: usuario.nombre,
+        email: usuario.email,
+        perfil: usuario.perfil,
+        unidad: usuario.unidad
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 // Devuelve el usuario de la sesion actual
 export const perfil = async (req, res) => {
   res.status(200).json({

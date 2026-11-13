@@ -1,9 +1,10 @@
 import { Router } from "express"
 
-import { registro, login, perfil } from "../controllers/autCont.js"
+import { registro, login, perfil, editarPerfil } from "../controllers/autCont.js"
 
 import {
   crearSolicitud,
+  editarSolicitud,
   derivarEstudiante,
   listarSolicitudes,
   verSolicitud,
@@ -43,6 +44,7 @@ import { registrar } from "../middlewares/bitacora.js"
 import {
   validarRegistro,
   validarLogin,
+  validarEdicionPerfil,
   validarSolicitud,
   validarClasificacion,
   validarTaller
@@ -54,6 +56,7 @@ const router = Router()
 router.post("/auth/registro", validarRegistro, registro)
 router.post("/auth/login", validarLogin, login)
 router.get("/auth/perfil", verificarToken, perfil)
+router.put("/auth/perfil", verificarToken, validarEdicionPerfil, editarPerfil)
 
 /* ================= Solicitudes =================
    Todo lo de aqui abajo exige sesion iniciada     */
@@ -82,6 +85,14 @@ router.get("/solicitudes", listarSolicitudes)
 router.get("/solicitudes/notificaciones", permitir("estudiante"), misNotificaciones)
 
 router.get("/solicitudes/:id", verSolicitud)
+
+// RF2 - el estudiante corrige su solicitud mientras sigue "recibida"
+router.put(
+  "/solicitudes/:id",
+  permitir("estudiante"),
+  validarSolicitud,
+  editarSolicitud
+)
 
 // RF4
 router.put(
